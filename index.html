@@ -24,6 +24,7 @@
   --gutter:80px; --maxw:1280px;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
@@ -142,9 +143,33 @@ em{font-style:italic}
 .contact .side b{color:var(--ink);font-weight:500}
 .contact .cta{grid-column:span 12;display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding-top:32px;border-top:1px solid var(--rule2)}
 .contact .cta .btn{height:56px;padding:0 26px;font-size:17px}
-.mail{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:15px}
-.copy{font:inherit;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;background:none;border:1px solid var(--edge);border-radius:4px;color:var(--ink2);padding:6px 10px;cursor:pointer;transition:border-color .2s,color .2s}
-.copy:hover{border-color:var(--ink);color:var(--ink)}
+.contact .cta .hint{font-family:var(--mono);font-size:13px;color:var(--ink3)}
+
+/* form dialog */
+.dlg{width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 32px);margin:auto;padding:0;border:1px solid var(--rule);border-radius:8px;background:var(--surface);color:var(--ink);box-shadow:0 30px 80px rgba(27,26,23,.18);overflow:auto}
+.dlg::backdrop{background:rgba(27,26,23,.45);backdrop-filter:blur(2px)}
+.dlg[open]{animation:pop .28s cubic-bezier(.2,.7,.2,1)}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
+.form,.form-ok{padding:32px 36px 36px;display:flex;flex-direction:column;gap:18px}
+.form-h{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.form-h h3,.form-ok h3{font-family:var(--serif);font-weight:400;font-size:40px;line-height:1;letter-spacing:-.02em}
+.form-h h3 em,.form-ok h3 em{color:var(--accent)}
+.x{flex-shrink:0;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;background:none;border:1px solid var(--edge);border-radius:6px;color:var(--ink2);cursor:pointer;transition:border-color .2s,color .2s}
+.x:hover{border-color:var(--ink);color:var(--ink)}
+.form-p{font-size:16px;color:var(--ink2)}
+.field{display:flex;flex-direction:column;gap:8px}
+.field span{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.field input,.field textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid var(--edge);border-radius:6px;padding:0 14px;height:48px;width:100%;transition:border-color .2s,box-shadow .2s}
+.field textarea{height:auto;min-height:120px;padding:12px 14px;resize:vertical;line-height:1.45}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(27,26,23,.08)}
+.field input[aria-invalid="true"],.field textarea[aria-invalid="true"]{border-color:var(--accent)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form-f{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:6px;flex-wrap:wrap}
+.form-err{font-size:14px;color:var(--accent);min-height:1em;flex:1 1 200px}
+.form .btn[disabled]{opacity:.6;cursor:wait}
+.form-ok p{font-size:17px;color:var(--ink2)}
+.form-ok .btn2{align-self:flex-start;height:44px}
+@media (max-width:720px){.form,.form-ok{padding:24px 20px 28px}.form-h h3,.form-ok h3{font-size:32px}}
 
 footer{border-top:1px solid var(--rule2)}
 footer .wrap{height:80px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--ink3)}
@@ -206,7 +231,7 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
       <a href="#record">What we record</a>
       <a href="#test">The test</a>
       <a href="#deliverable">Deliverable</a>
-      <a class="btn" href="#contact">Get a free episode</a>
+      <a class="btn" href="#contact" data-open>Get a free episode</a>
     </div>
   </div>
 </nav>
@@ -218,7 +243,7 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
     <div class="hero-row rv d2">
       <p>We want capable robots in people's lives as much as you do. Our part is the data for the one thing clips cannot teach: hours of real work, recorded start to finish, where what happened at minute 12 still matters at minute 120.</p>
       <div class="hero-cta">
-        <a class="btn" href="#contact">Get a free episode <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5"/></svg></a>
+        <a class="btn" href="#contact" data-open>Get a free episode <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5"/></svg></a>
         <a class="btn2" href="#test">See the test</a>
       </div>
     </div>
@@ -378,8 +403,8 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
       <p><b>We reply within five hours.</b></p>
     </div>
     <div class="cta rv d2">
-      <a class="btn" href="mailto:bhuwansaik@gmail.com?subject=Free%20episode">Get a free episode <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5"/></svg></a>
-      <span class="mail"><a href="mailto:bhuwansaik@gmail.com" id="mail" style="text-decoration:none">bhuwansaik@gmail.com</a><button class="copy" id="copy" type="button" aria-label="Copy email address">Copy</button></span>
+      <button class="btn" type="button" data-open>Get a free episode <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5"/></svg></button>
+      <span class="hint">Three fields. No account, no call.</span>
     </div>
   </div>
 </section>
@@ -393,6 +418,29 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
     <div class="meta"><span>physicaldata.tech</span><span>Human episodes for robot learning</span><span>© 2026</span></div>
   </div>
 </footer>
+
+<dialog class="dlg" id="dlg" aria-labelledby="dlg-t">
+  <form class="form" id="form" novalidate>
+    <div class="form-h">
+      <h3 id="dlg-t">Get a <em>free episode.</em></h3>
+      <button class="x" type="button" id="dlg-x" aria-label="Close"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12"/></svg></button>
+    </div>
+    <p class="form-p">Tell us the job and the environment. We record one full episode, run the test and send you the folder.</p>
+    <label class="field"><span>Name</span><input name="name" type="text" required autocomplete="name" maxlength="120"></label>
+    <label class="field"><span>Email</span><input name="email" type="email" required autocomplete="email" maxlength="200" inputmode="email"></label>
+    <label class="field"><span>What should your robot learn to keep track of?</span><textarea name="purpose" required maxlength="4000" placeholder="The task, the environment, and what you are training. A sentence is enough."></textarea></label>
+    <div class="hp" aria-hidden="true"><label>Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+    <div class="form-f">
+      <span class="form-err" id="form-err" role="alert" aria-live="polite"></span>
+      <button class="btn" type="submit" id="form-s">Send <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5"/></svg></button>
+    </div>
+  </form>
+  <div class="form-ok" id="form-ok" hidden>
+    <h3>Sent. <em>We reply within five hours.</em></h3>
+    <p>Look out for a reply from Physical Data. If it does not arrive, check your spam folder.</p>
+    <button class="btn2" type="button" id="dlg-ok">Close</button>
+  </div>
+</dialog>
 
 <script>
 (function(){
@@ -423,18 +471,55 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
     }
   }
 
-  // copy email
-  var copy = document.getElementById('copy');
-  if(copy){
-    copy.addEventListener('click', function(){
-      var addr = document.getElementById('mail').textContent.trim();
-      function done(){ copy.textContent = 'Copied'; setTimeout(function(){ copy.textContent = 'Copy'; }, 1600); }
-      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(addr).then(done, done); }
-      else {
-        var ta = document.createElement('textarea'); ta.value = addr; document.body.appendChild(ta); ta.select();
-        try{ document.execCommand('copy'); }catch(err){}
-        document.body.removeChild(ta); done();
+  // contact form dialog
+  var dlg = document.getElementById('dlg');
+  var form = document.getElementById('form');
+  var okBox = document.getElementById('form-ok');
+  var err = document.getElementById('form-err');
+  var sendBtn = document.getElementById('form-s');
+  var canDialog = dlg && typeof dlg.showModal === 'function';
+
+  function openDlg(){
+    if(!canDialog){ location.hash = '#contact'; return; }
+    form.hidden = false; okBox.hidden = true; err.textContent = '';
+    dlg.showModal();
+    var first = form.querySelector('input[name="name"]'); if(first) first.focus();
+  }
+  function closeDlg(){ if(canDialog && dlg.open) dlg.close(); }
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-open]'), function(el){
+    el.addEventListener('click', function(e){ e.preventDefault(); openDlg(); });
+  });
+  document.getElementById('dlg-x').addEventListener('click', closeDlg);
+  document.getElementById('dlg-ok').addEventListener('click', closeDlg);
+  if(dlg){ dlg.addEventListener('click', function(e){ if(e.target === dlg) closeDlg(); }); }
+
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      err.textContent = '';
+      var name = form.name.value.trim(), email = form.email.value.trim(), purpose = form.purpose.value.trim();
+      var bad = null;
+      if(!name){ bad = form.name; }
+      else if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ bad = form.email; }
+      else if(!purpose){ bad = form.purpose; }
+      Array.prototype.forEach.call(form.querySelectorAll('input,textarea'), function(i){ i.removeAttribute('aria-invalid'); });
+      if(bad){
+        bad.setAttribute('aria-invalid','true'); bad.focus();
+        err.textContent = bad === form.email && email ? 'That email address does not look right.' : 'Please fill in all three fields.';
+        return;
       }
+      sendBtn.disabled = true; var label = sendBtn.innerHTML; sendBtn.textContent = 'Sending';
+      fetch('/api/contact', {
+        method:'POST', headers:{'Content-Type':'application/json', 'Accept':'application/json'},
+        body: JSON.stringify({ name:name, email:email, purpose:purpose, website: form.website.value })
+      }).then(function(r){ return r.json().catch(function(){ return {ok:false}; }).then(function(j){ return {status:r.status, j:j}; }); })
+      .then(function(res){
+        if(res.j && res.j.ok){ form.reset(); form.hidden = true; okBox.hidden = false; document.getElementById('dlg-ok').focus(); }
+        else { err.textContent = (res.j && res.j.error) || 'Could not send right now. Please try again in a minute.'; }
+      })
+      .catch(function(){ err.textContent = 'Could not send right now. Please check your connection and try again.'; })
+      .then(function(){ sendBtn.disabled = false; sendBtn.innerHTML = label; });
     });
   }
 })();
