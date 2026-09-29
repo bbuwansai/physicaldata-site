@@ -70,13 +70,13 @@ module.exports = async function handler(req, res) {
   if (!to) return res.status(503).json({ ok: false, error: 'The form is not set up yet. Please try again later.' });
 
   const subject = 'Free episode request from ' + name;
-  const text = 'Name: ' + name + '\nEmail: ' + email + '\n\n' + purpose + '\n\nSent from physicaldata.tech';
+  const text = 'Name: ' + name + '\nEmail: ' + email + '\n\n' + purpose + '\n\nSent from copythatlabs.com';
 
   try {
     if (process.env.RESEND_API_KEY) {
       await sendViaResend({
         to,
-        from: process.env.CONTACT_FROM || 'Physical Data <onboarding@resend.dev>',
+        from: process.env.CONTACT_FROM || 'Copy That Labs <onboarding@resend.dev>',
         subject,
         text,
         replyTo: email,
