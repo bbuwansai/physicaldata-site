@@ -3,871 +3,440 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Physical Data</title>
-<meta name="description" content="Training data that remembers. Complete first-person episodes of real work, with every cause linked to its consequence, so robots learn to keep track, not just to act.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11.5' fill='none' stroke='%23ECE9E2' stroke-width='2'/%3E%3Cpath d='M4.5 16h23' stroke='%23ECE9E2' stroke-width='2'/%3E%3Ccircle cx='4.5' cy='16' r='3' fill='%23F2B84B'/%3E%3Ccircle cx='27.5' cy='16' r='3' fill='%23F2B84B'/%3E%3C/svg%3E">
+<title>Physical Data · Training data that remembers</title>
+<meta name="description" content="Human episodes for robot learning. Hours of real work, recorded start to finish, with every cause linked to its consequence. One free episode, with the A/B/C test run on it.">
+<meta property="og:title" content="Physical Data · Training data that remembers">
+<meta property="og:description" content="Human episodes for robot learning. Hours of real work, recorded start to finish, with every cause linked to its consequence.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://physicaldata.tech/">
+<meta name="theme-color" content="#F7F3EA">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F7F3EA'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%231B1A17' stroke-width='4'/%3E%3Cpath d='M11 32h42' stroke='%231B1A17' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='11' cy='32' r='6' fill='%238C2F1B'/%3E%3Ccircle cx='53' cy='32' r='6' fill='%238C2F1B'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* Layout: product-site grammar. Tight geometric sans, dark surfaces with hairlines, ambient light, a live instrument in the hero, a scroll-driven "minute by minute" section with a sticky state card, staggered reveals. Single dark theme by design. */
 :root{
-  --bg:#0A0C10; --bg2:#0D1015; --surface:#10141A; --surface2:#141920;
-  --line:rgba(236,233,226,.08); --line2:rgba(236,233,226,.14); --line3:rgba(236,233,226,.22);
-  --fg:#F1EEE8; --fg2:#A9A79F; --fg3:#6E6C67;
-  --live:#F2B84B; --err:#E0645C; --cool:#8FCBD6; --ok:#8FBF9A;
-  --sans:"Geist", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  --r:14px;
-  color-scheme:dark;
+  --paper:#F7F3EA; --surface:#FFFDF8; --ink:#1B1A17; --ink2:#3A3833; --ink3:#6E6A62;
+  --rule:#1B1A17; --rule2:#DED8CB; --edge:#B8B2A4; --accent:#8C2F1B;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Instrument Sans',system-ui,'Segoe UI',Helvetica,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --gutter:80px; --maxw:1280px;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.wrap{max-width:1240px;margin:0 auto;padding-inline:clamp(20px,5vw,64px)}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
-a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:1px solid var(--live);outline-offset:4px}
-h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.03em}
-p{margin:0}
-.lab{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3)}
-::selection{background:var(--live);color:#0A0C10}
+h1,h2,h3,p{margin:0}
+em{font-style:italic}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+.mono{font-family:var(--mono)}
+.lab{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 22px;background:var(--ink);color:var(--paper);border-radius:6px;font-size:16px;font-weight:500;text-decoration:none;transition:background .2s,transform .2s;white-space:nowrap}
+.btn:hover{background:var(--accent)}
+.btn:active{transform:translateY(1px)}
+.btn svg{transition:transform .2s}
+.btn:hover svg{transform:translateX(3px)}
+.btn2{display:inline-flex;align-items:center;height:52px;padding:0 22px;border:1px solid var(--edge);color:var(--ink);border-radius:6px;font-size:16px;font-weight:500;text-decoration:none;transition:border-color .2s;white-space:nowrap}
+.btn2:hover{border-color:var(--ink)}
 
-/* ambient light */
-.glow{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.glow i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.28;will-change:transform}
-.glow .a{width:60vw;height:60vw;left:-20vw;top:-25vw;background:radial-gradient(circle,rgba(242,184,75,.45),transparent 62%);animation:drift1 26s ease-in-out infinite alternate}
-.glow .b{width:50vw;height:50vw;right:-18vw;top:20vh;background:radial-gradient(circle,rgba(143,203,214,.32),transparent 62%);animation:drift2 32s ease-in-out infinite alternate}
-@keyframes drift1{from{transform:translate(0,0)}to{transform:translate(8vw,6vh)}}
-@keyframes drift2{from{transform:translate(0,0)}to{transform:translate(-6vw,10vh)}}
-main,header,footer{position:relative;z-index:1}
-
-/* reveal system */
-.rv{opacity:1;transform:none}
-.rv.pre{opacity:0;transform:translateY(18px)}
-.rv.in{opacity:1;transform:none;transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
-.rv.in.d1{transition-delay:.08s}.rv.in.d2{transition-delay:.16s}.rv.in.d3{transition-delay:.24s}.rv.in.d4{transition-delay:.32s}.rv.in.d5{transition-delay:.4s}
+/* reveal */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .arc{stroke-dashoffset:0!important;animation:none!important}
+  .ph,.rec{animation:none!important}
+}
 
 /* nav */
-.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border-bottom:1px solid transparent;transition:border-color .3s}
-.nav.scrolled{border-bottom-color:var(--line)}
-.nav .row{display:flex;align-items:center;justify-content:space-between;gap:20px;height:64px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:15px;letter-spacing:-.01em}
-.brand svg{width:26px;height:26px;display:block}
-.nav ul{display:flex;align-items:center;gap:6px;list-style:none;margin:0;padding:0}
-.nav ul a{font-size:13.5px;color:var(--fg2);text-decoration:none;padding:8px 12px;border-radius:8px;transition:color .2s,background .2s}
-.nav ul a:hover{color:var(--fg);background:rgba(236,233,226,.05)}
-.nav ul a.cta{color:#0A0C10;background:var(--fg);font-weight:500;margin-left:8px}
-.nav ul a.cta:hover{background:#fff}
-@media (max-width:900px){.nav ul li:not(:last-child){display:none}}
+.nav{position:sticky;top:0;z-index:20;background:rgba(247,243,234,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.nav .wrap{height:72px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.brand span{font-family:var(--serif);font-size:24px;letter-spacing:-.01em}
+.links{display:flex;align-items:center;gap:36px}
+.links a{font-size:14px;font-weight:500;text-decoration:none;color:var(--ink2);transition:color .2s}
+.links a:hover{color:var(--accent)}
+.links .btn,.links .btn:hover{height:40px;padding:0 18px;font-size:14px;color:var(--paper)}
 
 /* hero */
-.hero{padding-block:clamp(56px,9vw,120px) 0}
-.pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg2);border:1px solid var(--line2);border-radius:999px;padding:7px 12px 7px 9px;background:rgba(236,233,226,.03)}
-.pill i{width:6px;height:6px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 rgba(242,184,75,.5);animation:ping 2.2s infinite}
-@keyframes ping{0%{box-shadow:0 0 0 0 rgba(242,184,75,.5)}70%{box-shadow:0 0 0 8px rgba(242,184,75,0)}100%{box-shadow:0 0 0 0 rgba(242,184,75,0)}}
-.hero h1{margin-top:22px;font-size:clamp(44px,7.4vw,108px);line-height:.98;letter-spacing:-.045em;font-weight:600}
-.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
-.hero h1 .w span{display:inline-block;animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
-.hero h1 em{font-style:normal;color:var(--live)}
-@keyframes rise{from{transform:translateY(105%)}to{transform:none}}
-.hero .sub{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:end;margin-top:clamp(24px,3vw,36px)}
-@media (max-width:760px){.hero .sub{grid-template-columns:minmax(0,1fr)}}
-.lede{font-size:clamp(17px,1.5vw,20px);line-height:1.5;color:var(--fg2);max-width:36em;animation:fade 1s .3s both}
-.lede b{font-weight:500;color:var(--fg)}
-@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.ctas{display:flex;gap:10px;flex-wrap:wrap;animation:fade 1s .45s both}
-.btn{display:inline-flex;align-items:center;gap:10px;font-size:14.5px;font-weight:500;text-decoration:none;padding:13px 18px;border-radius:10px;border:1px solid var(--line2);color:var(--fg);transition:transform .2s,background .2s,border-color .2s;white-space:nowrap}
-.btn:hover{transform:translateY(-1px);border-color:var(--line3);background:rgba(236,233,226,.04)}
-.btn.pri{background:var(--fg);color:#0A0C10;border-color:var(--fg)}
-.btn.pri:hover{background:#fff}
-.btn svg{width:14px;height:14px}
+.hero{padding:112px 0 56px}
+.hero .wrap{display:flex;flex-direction:column;gap:40px}
+.kicker{display:flex;align-items:center;gap:12px}
+.kicker i{display:inline-block;width:32px;height:1px;background:var(--ink)}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(64px,10.4vw,150px);line-height:.92;letter-spacing:-.03em;max-width:1100px}
+.hero h1 em{color:var(--accent)}
+.hero-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;align-items:end;padding-top:8px}
+.hero-row p{grid-column:span 7;font-size:22px;line-height:1.45;color:var(--ink2);text-wrap:pretty}
+.hero-cta{grid-column:9/span 4;display:flex;gap:12px;justify-content:flex-end}
 
-/* instrument */
-.inst{margin-top:clamp(40px,6vw,64px);border:1px solid var(--line2);background:linear-gradient(180deg,var(--surface),var(--bg2));border-radius:var(--r);font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3);box-shadow:0 40px 100px -40px rgba(0,0,0,.8),0 0 0 1px rgba(0,0,0,.4);animation:fade 1s .55s both;overflow:hidden}
-.inst-top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 16px;border-bottom:1px solid var(--line)}
-.inst-top .grp{display:flex;gap:22px;align-items:center;min-width:0}
-.inst-top .grp span{white-space:nowrap}
-.rec{color:var(--fg);display:flex;align-items:center;gap:8px}
-.rec i{width:8px;height:8px;border-radius:50%;background:var(--err);animation:blink 1.4s steps(2) infinite}
-@keyframes blink{50%{opacity:.15}}
-.tc{color:var(--fg);font-variant-numeric:tabular-nums}
-@media (max-width:720px){.inst-top .opt{display:none}}
-.inst-main{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.25fr) minmax(0,.9fr)}
-.pane{min-width:0;display:flex;flex-direction:column}
-.pane+.pane{border-left:1px solid var(--line)}
-.pane-h{display:flex;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);white-space:nowrap;overflow:hidden}
-.pane-h b{font-weight:500;color:var(--fg2);overflow:hidden;text-overflow:ellipsis}
-.pane-b{padding:14px 16px;flex:1;min-height:0}
-@media (max-width:980px){.inst-main{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.pane.side{grid-column:1 / -1;border-left:0;border-top:1px solid var(--line)}}
-@media (max-width:640px){.inst-main{grid-template-columns:minmax(0,1fr)}.pane+.pane{border-left:0;border-top:1px solid var(--line)}}
-.state{display:grid;gap:14px;text-transform:none;letter-spacing:0}
-.sblk{display:grid;gap:6px}
-.sblk .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);display:flex;justify-content:space-between;gap:8px}
-.sblk .k b{font-weight:500;color:var(--fg3)}
-.sblk .v{font-size:14px;color:var(--fg);line-height:1.4}
-.sblk .v.dim{color:var(--fg3)}
-.sblk ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.sblk li{display:grid;grid-template-columns:8px minmax(0,1fr);gap:8px;align-items:start;font-size:14px;color:var(--fg);line-height:1.4}
-.sblk li i{width:6px;height:6px;margin-top:7px;display:inline-block;background:var(--live);border-radius:2px}
-.sblk li.pl i{background:var(--cool)}
-.sblk li.su i{background:var(--err)}
-.sblk li small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3);margin-top:2px;font-variant-numeric:tabular-nums}
-.sblk .bar{height:2px;background:rgba(236,233,226,.08);position:relative;margin-top:2px;border-radius:2px;overflow:hidden}
-.sblk .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--live)}
-.log{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;justify-content:flex-end;gap:14px;overflow:hidden;height:100%;text-transform:none;letter-spacing:0}
-.pane.mid .pane-b{display:flex;flex-direction:column;min-height:360px}
-.rec-i{display:grid;gap:5px;transition:opacity .5s;border-left:1px solid var(--line2);padding-left:12px}
-.rec-i .m{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg3);display:flex;gap:12px;align-items:center;font-variant-numeric:tabular-nums;flex-wrap:wrap}
-.rec-i .m b{font-weight:500;display:flex;align-items:center;gap:6px;color:var(--fg2)}
-.rec-i .m b::before{content:"";width:5px;height:5px;background:currentColor;display:inline-block;border-radius:1px}
-.rec-i .m b.FAIL,.rec-i .m b.RECOVER{color:var(--err)}
-.rec-i .m b.INTERRUPT,.rec-i .m b.RESUME{color:var(--live)}
-.rec-i .m b.RETRIEVE{color:var(--cool)}
-.rec-i .m b.DONE{color:var(--ok)}
-.rec-i .f{display:grid;grid-template-columns:82px minmax(0,1fr);gap:2px 10px;font-size:13px;line-height:1.4;margin:0}
-.rec-i .f dt{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg3);padding-top:3px}
-.rec-i .f dd{margin:0;color:var(--fg2)}
-.rec-i .f dd.d{color:var(--fg)}
-.rec-i .f dd.o{color:var(--live)}
-.rec-i .f dd.r{color:var(--cool)}
-.rec-i.new dd.d::after{content:"";display:inline-block;width:7px;height:13px;background:var(--live);vertical-align:-2px;margin-left:3px;animation:blink 1s steps(2) infinite}
-.rec-i.old1{opacity:.7}.rec-i.old2{opacity:.45}.rec-i.old3{opacity:.28}.rec-i.old4{opacity:.16}
-.deps{list-style:none;margin:0;padding:0;display:grid;gap:10px;text-transform:none;letter-spacing:0}
-.deps li{display:grid;grid-template-columns:8px minmax(0,1fr) auto;gap:10px;align-items:start;padding-bottom:10px;border-bottom:1px solid var(--line)}
-.deps li:last-child{border-bottom:0;padding-bottom:0}
-.deps li i{width:6px;height:6px;margin-top:7px;background:var(--fg3);display:inline-block;border-radius:2px}
-.deps li.open i{background:var(--live)}
-.deps li.closed i{background:var(--cool)}
-.deps li.hot i{box-shadow:0 0 0 3px rgba(143,203,214,.25)}
-.deps .w{font-size:14px;color:var(--fg);line-height:1.35}
-.deps li.future .w{color:var(--fg3)}
-.deps .s{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3);font-variant-numeric:tabular-nums;margin-top:2px}
-.deps .sp{font-family:var(--mono);font-size:11px;color:var(--fg2);font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:2px}
-.deps li.open .sp{color:var(--live)}
-.cams{border-top:1px solid var(--line)}
-.cams .pane-b{display:grid;gap:8px}
-.cam{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;font-variant-numeric:tabular-nums}
-.cam .d{width:6px;height:6px;background:var(--err);border-radius:50%;animation:blink 1.4s steps(2) infinite}
-.cam .n{color:var(--fg2)}.cam .v{color:var(--fg3);white-space:nowrap}
-.inst-tl{border-top:1px solid var(--line)}
-.inst-tl canvas{display:block;width:100%;height:110px;cursor:ew-resize;touch-action:none}
-@media (max-width:720px){.inst-tl canvas{height:84px}}
-.caption{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:14px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3)}
+/* episode strip */
+.strip{padding:32px 0 112px}
+.strip-h{display:flex;justify-content:space-between;align-items:center;gap:24px;padding-bottom:14px;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink2)}
+.strip-h b{font-weight:500;color:var(--ink)}
+.strip-h > div{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+.rec{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.tl{padding-top:12px}
+.tl-svg{position:relative}
+.tl svg{display:block;width:100%;height:auto;overflow:visible}
+.tl svg line,.tl svg path,.cmp svg line,.cmp svg path{vector-effect:non-scaling-stroke}
+.tl .arc{stroke-dasharray:1;stroke-dashoffset:1}
+.tl.on .arc{animation:draw 1.8s cubic-bezier(.2,.7,.2,1) forwards}
+.tl.on .a1{animation-delay:.3s}.tl.on .a2{animation-delay:.6s}.tl.on .a3{animation-delay:.9s}.tl.on .a4{animation-delay:1.2s}.tl.on .a5{animation-delay:1.5s}
+@keyframes draw{to{stroke-dashoffset:0}}
+.ph{position:absolute;left:0;top:14%;width:1px;height:72%;background:var(--ink);opacity:.5;pointer-events:none;animation:sweep 42s linear infinite}
+@keyframes sweep{from{left:0}to{left:100%}}
+.tl-axis{display:none}
+.tl-list{display:none}
+.strip-note{margin-top:8px;max-width:760px;font-size:16px;color:var(--ink3)}
 
 /* sections */
-.sec{padding-block:clamp(72px,10vw,140px) 0}
-.sec-h{display:grid;gap:16px;padding-bottom:clamp(28px,4vw,44px);max-width:52em}
-.sec-h h2{font-size:clamp(32px,4.6vw,60px);line-height:1.02;max-width:16ch;text-wrap:balance}
-.sec-h h2 em{font-style:normal;color:var(--fg2)}
-.sec-h p{color:var(--fg2);font-size:clamp(16px,1.3vw,18px);max-width:40em}
-.sec-h p b{color:var(--fg);font-weight:500}
+.sec{padding:112px 0;border-top:1px solid var(--rule)}
+.g12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:48px}
+.g12 .lab{grid-column:span 3}
+.g12 .body{grid-column:span 9;display:flex;flex-direction:column;gap:28px}
+.sec h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,4.6vw,64px);line-height:1;letter-spacing:-.02em;max-width:900px;text-wrap:pretty}
+.sec h2 em{color:var(--accent)}
+.lede{font-size:20px;line-height:1.5;color:var(--ink2);max-width:720px;text-wrap:pretty}
 
-/* scrolly */
-.scrolly{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:start}
-@media (max-width:860px){.scrolly{grid-template-columns:minmax(0,1fr)}}
-.steps-col{display:grid;gap:clamp(48px,14vh,160px);padding-block:clamp(24px,8vh,80px)}
-.stepc{display:grid;gap:10px;opacity:.35;transition:opacity .4s}
-.stepc.on{opacity:1}
-.stepc .t{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--live)}
-.stepc h3{font-size:clamp(24px,2.6vw,34px);line-height:1.1;letter-spacing:-.03em}
-.stepc p{color:var(--fg2);font-size:16px;max-width:30em}
-.sticky{position:sticky;top:calc(64px + env(safe-area-inset-top,0px) + 32px)}
-@media (max-width:860px){.sticky{position:relative;top:0;order:-1}.steps-col{gap:40px;padding-block:8px}.stepc{opacity:1}}
-.card{border:1px solid var(--line2);background:linear-gradient(180deg,var(--surface),var(--bg2));border-radius:var(--r);padding:20px 22px;display:grid;gap:16px;box-shadow:0 30px 80px -40px rgba(0,0,0,.8)}
-.card .ch{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg3)}
-.card .ch b{color:var(--fg);font-weight:500;font-variant-numeric:tabular-nums;font-size:13px}
-.kv{display:grid;gap:6px}
-.kv .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);display:flex;justify-content:space-between}
-.kv ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.kv li{display:grid;grid-template-columns:8px minmax(0,1fr);gap:8px;align-items:start;font-size:14px;line-height:1.4;transition:opacity .35s,transform .35s}
-.kv li i{width:6px;height:6px;margin-top:7px;display:inline-block;background:var(--live);border-radius:2px}
-.kv li.pl i{background:var(--cool)}.kv li.su i{background:var(--err)}.kv li.ok i{background:var(--ok)}
-.kv li small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3);margin-top:2px}
-.kv li.none{display:block;font-size:13px;color:var(--fg3)}
-.kv li.enter{animation:kin .45s cubic-bezier(.2,.8,.2,1) both}
-@keyframes kin{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
-.card .note{font-size:14px;color:var(--fg2);border-top:1px solid var(--line);padding-top:12px}
-.card .note b{color:var(--fg);font-weight:500}
+.compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px;row-gap:40px;margin-top:64px}
+.cmp{display:flex;flex-direction:column;gap:16px;padding-top:20px;border-top:1px solid var(--rule)}
+.cmp svg{display:block;width:100%;height:auto;overflow:visible}
+.cmp p{font-size:17px;color:var(--ink2)}
+.cmp code{font-family:var(--mono);font-size:13.5px;color:var(--ink)}
 
-/* levels */
-.levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-@media (max-width:760px){.levels{grid-template-columns:minmax(0,1fr)}}
-.lvl{border:1px solid var(--line);border-radius:var(--r);padding:24px;display:grid;gap:12px;align-content:start;background:rgba(236,233,226,.015);transition:border-color .25s,background .25s}
-.lvl:hover{border-color:var(--line2);background:rgba(236,233,226,.03)}
-.lvl .t{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);display:flex;justify-content:space-between}
-.lvl .t b{font-weight:500;color:var(--live)}
-.lvl h3{font-size:clamp(26px,2.8vw,36px);color:var(--fg2)}
-.lvl.next{border-color:rgba(242,184,75,.35);background:linear-gradient(180deg,rgba(242,184,75,.07),rgba(242,184,75,.02))}
-.lvl.next h3{color:var(--fg)}
-.lvl .q{font-size:17px;color:var(--fg);line-height:1.35;font-weight:500;letter-spacing:-.01em}
-.lvl p{color:var(--fg2);font-size:14.5px}
+.rows{display:flex;flex-direction:column;border-top:1px solid var(--rule)}
+.row{display:grid;grid-template-columns:320px 1fr;column-gap:32px;padding:22px 0;border-bottom:1px solid var(--rule2);align-items:baseline}
+.row h3{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.1}
+.row p{font-size:17px;color:var(--ink2)}
 
-/* rows */
-.rows{border-top:1px solid var(--line)}
-.rowd{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:20px clamp(24px,5vw,80px);padding:clamp(26px,4vw,40px) 12px;margin-inline:-12px;border-bottom:1px solid var(--line);align-items:start;border-radius:12px;transition:background .3s}
-.rowd:hover{background:rgba(236,233,226,.02)}
-@media (max-width:760px){.rowd{grid-template-columns:minmax(0,1fr)}}
-.rowd h3{font-size:clamp(26px,3.2vw,42px);line-height:1.05;text-wrap:balance}
-.rowd h3 em{font-style:normal;color:var(--fg2)}
-.rowd .body{display:grid;gap:20px;max-width:40em}
-.rowd .body p{font-size:clamp(16px,1.2vw,17.5px);line-height:1.55;color:var(--fg2)}
-.rowd .body p b{color:var(--fg);font-weight:500}
-.ex{font-family:var(--mono);font-size:12px;letter-spacing:.02em;color:var(--fg3);border-left:1px solid var(--line2);padding-left:14px;line-height:1.7;text-transform:none}
-.ex b{color:var(--fg2);font-weight:500}
-.ex .r{color:var(--err)}.ex .a{color:var(--live)}.ex .c{color:var(--cool)}
-.fig{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3)}
-.spans{display:grid;gap:8px;margin-top:6px}
-.sprow{display:grid;grid-template-columns:minmax(0,11em) minmax(0,1fr) 5em;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
-@media (max-width:560px){.sprow{grid-template-columns:minmax(0,8em) minmax(0,1fr) 4.5em}}
-.sprow .n{color:var(--fg2);text-transform:none;letter-spacing:0;font-family:var(--sans);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.sprow .tr{position:relative;height:10px;background:rgba(236,233,226,.05);border-radius:3px}
-.sprow .tr i{position:absolute;top:3px;height:4px;background:var(--cool);border-radius:2px;transform-origin:left;transform:scaleX(0);transition:transform 1.1s cubic-bezier(.2,.8,.2,1)}
-.in .sprow .tr i,.sprow.static .tr i{transform:none}
-.sprow .tr s,.sprow .tr u{position:absolute;top:0;width:2px;height:10px;text-decoration:none;background:var(--fg2)}
-.sprow .tr u{background:var(--cool)}
-.sprow .d{text-align:right;color:var(--fg2)}
-.axis{display:flex;justify-content:space-between;margin-top:6px;color:var(--fg3)}
-.br{display:grid;gap:8px;margin-top:6px}
-.brow{display:grid;grid-template-columns:2.2em minmax(0,1fr);gap:12px;align-items:start}
-.brow .c{font-family:var(--mono);font-size:22px;line-height:1;color:var(--fg);font-variant-numeric:tabular-nums;padding-top:2px}
-.brow .t{text-transform:none;letter-spacing:0;font-family:var(--sans);font-size:14px;color:var(--fg);line-height:1.4}
-.brow .t small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3);margin-top:3px}
-.brow .bar{height:6px;background:rgba(236,233,226,.05);margin-top:6px;position:relative;border-radius:3px;overflow:hidden}
-.brow .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--live);transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
-.in .brow .bar i{transform:none}
-.brow.alt .bar i{background:rgba(236,233,226,.3)}
-.fig-note{margin-top:8px;color:var(--fg3)}
+.arms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:24px;row-gap:32px}
+.arm{display:flex;flex-direction:column;gap:10px;padding-top:18px;border-top:1px solid var(--rule)}
+.arm.ours{border-top:2px solid var(--accent)}
+.arm .n{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--ink3)}
+.arm.ours .n{color:var(--accent)}
+.arm h3{font-size:19px;font-weight:600}
+.arm p{font-size:16px;color:var(--ink2)}
+.verdict{font-size:20px;line-height:1.5;color:var(--ink2);max-width:820px;text-wrap:pretty}
+.verdict strong{color:var(--ink);font-weight:600}
 
-/* records */
-.recs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-@media (max-width:820px){.recs{grid-template-columns:minmax(0,1fr)}}
-.recx{border:1px solid var(--line2);background:linear-gradient(180deg,var(--surface),var(--bg2));border-radius:var(--r);padding:18px 20px;font-family:var(--mono);font-size:12px;line-height:1.7;color:var(--fg2);overflow-x:auto}
-.recx .h{color:var(--fg3);font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;display:flex;justify-content:space-between;gap:12px}
-.recx .h b{color:var(--fg);font-weight:500}
-.recx dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 16px}
-.recx dt{color:var(--fg3)}.recx dd{margin:0;color:var(--fg)}
-.recx dd.o{color:var(--live)}.recx dd.r{color:var(--cool)}
-.link-line{grid-column:1 / -1;display:flex;align-items:center;gap:14px;color:var(--fg2);font-size:15px;padding:6px 4px 0}
-.link-line svg{flex:none}
-.link-line b{color:var(--fg);font-weight:500}
+.deliv{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:40px;align-items:start}
+.tree{grid-column:span 6;margin:0;background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:24px 28px;font-family:var(--mono);font-size:12.5px;line-height:1.75;color:var(--ink2);white-space:pre;overflow-x:auto}
+.tree b{font-weight:500;color:var(--ink)}
+.tree i{font-style:normal;color:var(--accent)}
+.spec{grid-column:8/span 5;display:flex;flex-direction:column;border-top:1px solid var(--rule)}
+.spec div{display:grid;grid-template-columns:110px 1fr;column-gap:20px;padding:18px 0;border-bottom:1px solid var(--rule2);font-size:16px}
+.spec div:last-child{border-bottom:0}
+.spec dt{font-weight:600}
+.spec dd{margin:0;color:var(--ink2)}
+.spec dd strong{color:var(--ink);font-weight:600}
 
-/* experiment */
-.exp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-@media (max-width:760px){.exp{grid-template-columns:minmax(0,1fr)}}
-.arm{border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:10px;align-content:start;background:rgba(236,233,226,.015)}
-.arm .n{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--live)}
-.arm h3{font-size:22px}
-.arm p{color:var(--fg2);font-size:15px}
-.exp-q{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,64px);padding-top:clamp(22px,3vw,34px)}
-@media (max-width:760px){.exp-q{grid-template-columns:minmax(0,1fr)}}
-.exp-q ul{margin:0;padding:0;list-style:none;display:grid;gap:10px;font-size:clamp(17px,1.5vw,20px);line-height:1.3;color:var(--fg);font-weight:500;letter-spacing:-.01em}
-.exp-q ul li{display:flex;gap:12px;align-items:baseline}
-.exp-q ul li::before{content:"?";font-family:var(--mono);font-size:12px;color:var(--live);border:1px solid rgba(242,184,75,.4);border-radius:6px;padding:1px 6px}
-.verdict{display:grid;gap:14px;align-content:start}
-.verdict p{color:var(--fg2);font-size:16px}
-.verdict p b{color:var(--fg);font-weight:500}
-.verdict .big{font-size:clamp(20px,2vw,26px);line-height:1.25;color:var(--fg);font-weight:500;letter-spacing:-.02em}
+.contact{padding:112px 0 96px;border-top:1px solid var(--rule)}
+.contact .g12{row-gap:48px}
+.contact h2{grid-column:span 8;font-family:var(--serif);font-weight:400;font-size:clamp(48px,6.2vw,88px);line-height:.98;letter-spacing:-.03em;text-wrap:pretty}
+.contact h2 em{color:var(--accent)}
+.contact .side{grid-column:9/span 4;display:flex;flex-direction:column;gap:16px;font-size:18px;color:var(--ink2);padding-top:12px}
+.contact .side b{color:var(--ink);font-weight:500}
+.contact .cta{grid-column:span 12;display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding-top:32px;border-top:1px solid var(--rule2)}
+.contact .cta .btn{height:56px;padding:0 26px;font-size:17px}
+.mail{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:15px}
+.copy{font:inherit;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;background:none;border:1px solid var(--edge);border-radius:4px;color:var(--ink2);padding:6px 10px;cursor:pointer;transition:border-color .2s,color .2s}
+.copy:hover{border-color:var(--ink);color:var(--ink)}
 
-/* steps */
-.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
-@media (max-width:1000px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.steps{grid-template-columns:minmax(0,1fr)}}
-.step{border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:12px;align-content:start;min-width:0;background:rgba(236,233,226,.015);transition:border-color .25s,transform .25s}
-.step:hover{border-color:var(--line2);transform:translateY(-2px)}
-.step .n{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--live)}
-.step h3{font-size:22px}
-.step p{color:var(--fg2);font-size:14.5px;line-height:1.5}
+footer{border-top:1px solid var(--rule2)}
+footer .wrap{height:80px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--ink3)}
+footer .brand span{font-size:18px}
+footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter-spacing:.04em}
 
-/* deliverable */
-.deliv{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:start}
-@media (max-width:860px){.deliv{grid-template-columns:minmax(0,1fr)}}
-.tree{font-family:var(--mono);font-size:11.5px;line-height:1.8;margin:0;letter-spacing:0;color:var(--fg2);border:1px solid var(--line2);padding:20px 22px;overflow-x:auto;background:linear-gradient(180deg,var(--surface),var(--bg2));border-radius:var(--r)}
-.tree b{color:var(--fg);font-weight:500}.tree i{font-style:normal;color:var(--fg3)}.tree .k{color:var(--live)}
-.spec{display:grid;gap:0}
-.spec div{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px}
-.spec div:first-child{border-top:1px solid var(--line)}
-.spec dt{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg3);margin:0;padding-top:3px}
-.spec dd{margin:0;color:var(--fg2)}.spec dd b{color:var(--fg);font-weight:500}
-
-/* faq */
-.faq{border-top:1px solid var(--line)}
-.faq details{border-bottom:1px solid var(--line)}
-.faq summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) 24px;gap:16px;align-items:center;padding:20px 0;font-size:clamp(17px,1.7vw,21px);font-weight:500;letter-spacing:-.015em;line-height:1.3}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";font-family:var(--mono);font-size:18px;color:var(--fg3);text-align:right;transition:transform .25s}
-.faq details[open] summary::after{transform:rotate(45deg)}
-.faq .a{padding:0 0 22px;color:var(--fg2);max-width:40em;font-size:16px}
-.faq .a b{color:var(--fg);font-weight:500}
-
-/* contact */
-.contact{margin-top:clamp(72px,10vw,140px);border-top:1px solid var(--line);padding-block:clamp(56px,8vw,112px)}
-.contact .g{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,5vw,80px);align-items:start}
-@media (max-width:820px){.contact .g{grid-template-columns:minmax(0,1fr)}}
-.contact h2{font-size:clamp(32px,4.4vw,60px);line-height:1.02;text-wrap:balance}
-.fnote{margin-top:22px;color:var(--fg2);font-size:17px;line-height:1.55;max-width:32em}
-.fnote b{color:var(--fg);font-weight:500}
-.sig{margin-top:18px;font-size:15px;color:var(--fg);font-weight:500}
-.ccard{border:1px solid var(--line2);background:linear-gradient(180deg,var(--surface),var(--bg2));border-radius:var(--r);padding:24px}
-.ccard .mail{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:12px}
-.ccard .mail code{font-family:var(--mono);font-size:clamp(16px,1.5vw,20px);color:var(--fg);user-select:all;overflow-wrap:anywhere}
-.ccard .mail a{text-decoration:none}
-.copy{font:inherit;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:rgba(236,233,226,.05);border:1px solid var(--line2);border-radius:8px;color:var(--fg);cursor:pointer;padding:7px 10px;transition:background .2s}
-.copy:hover{background:rgba(236,233,226,.1)}
-.ccard p{margin-top:14px;color:var(--fg3);font-size:14px}
-footer{border-top:1px solid var(--line)}
-footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding-block:26px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg3)}
-footer .brand{font-size:13px}
-
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto}
-  .hero h1 .w span,.lede,.ctas,.inst{animation:none}
-  .glow i{animation:none}
-  .rec i,.cam .d,.rec-i.new dd.d::after,.pill i{animation:none}
-  .rv.pre{opacity:1;transform:none}
-  .sprow .tr i,.brow .bar i{transform:none;transition:none}
+/* responsive */
+@media (max-width:1100px){
+  :root{--gutter:48px}
+  .row{grid-template-columns:260px 1fr}
+}
+@media (max-width:900px){
+  :root{--gutter:24px}
+  .links a:not(.btn){display:none}
+  .hero{padding:72px 0 40px}
+  .hero .wrap{gap:28px}
+  .hero-row{display:flex;flex-direction:column;align-items:flex-start;gap:24px}
+  .hero-row p{font-size:19px}
+  .hero-cta{justify-content:flex-start;flex-wrap:wrap}
+  .strip{padding:24px 0 80px}
+  .strip-h{flex-direction:column;align-items:flex-start;gap:8px}
+  .strip-h > div{gap:14px}
+  .sec{padding:80px 0}
+  .g12{display:flex;flex-direction:column;gap:28px}
+  .compare{grid-template-columns:1fr;margin-top:40px}
+  .row{grid-template-columns:1fr;row-gap:8px}
+  .row h3{font-size:26px}
+  .arms{grid-template-columns:1fr}
+  .deliv{display:flex;flex-direction:column}
+  .tree{font-size:11.5px;padding:18px 20px;width:100%}
+  .spec{width:100%}
+  .contact{padding:80px 0 64px}
+  .contact .g12{gap:28px}
+  .contact .side{padding-top:0}
+  footer .wrap{height:auto;padding-top:24px;padding-bottom:24px;flex-direction:column;align-items:flex-start;gap:14px}
+  footer .meta{flex-wrap:wrap;gap:12px 20px}
+}
+@media (max-width:720px){
+  .tl svg{height:170px;width:100%}
+  .tl svg text{display:none}
+  .tl-axis{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--ink3);margin-top:8px}
+  .tl-list{display:flex;flex-direction:column;margin-top:20px;border-top:1px solid var(--rule)}
+  .tl-list div{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--rule2);font-family:var(--mono);font-size:12.5px}
+  .tl-list div span:last-child{color:var(--ink3);white-space:nowrap}
+  .ph{top:8%;height:82%}
+  .spec div{grid-template-columns:90px 1fr;column-gap:14px;font-size:15px}
 }
 </style>
 </head>
 <body>
 
-<div class="glow" aria-hidden="true"><i class="a"></i><i class="b"></i></div>
-
-<header class="nav" id="nav">
-  <div class="wrap row">
-    <a class="brand" href="#top" aria-label="Physical Data home">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4.5 16h23" stroke="currentColor" stroke-width="2"/><circle cx="4.5" cy="16" r="3" fill="#F2B84B"/><circle cx="27.5" cy="16" r="3" fill="#F2B84B"/></svg>
-      Physical Data
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Physical Data, home">
+      <svg width="26" height="26" viewBox="0 0 64 64" fill="none" aria-hidden="true"><circle cx="32" cy="32" r="23" stroke="#1B1A17" stroke-width="4"/><path d="M9 32h46" stroke="#1B1A17" stroke-width="4" stroke-linecap="round"/><circle cx="9" cy="32" r="6" fill="#8C2F1B"/><circle cx="55" cy="32" r="6" fill="#8C2F1B"/></svg>
+      <span>Physical Data</span>
     </a>
-    <ul>
-      <li><a href="#minute">Minute by minute</a></li>
-      <li><a href="#design">What we record</a></li>
-      <li><a href="#proof">The test</a></li>
-      <li><a href="#deliver">Deliverable</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a class="cta" href="#contact">Get a free episode</a></li>
-    </ul>
+    <div class="links">
+      <a href="#record">What we record</a>
+      <a href="#test">The test</a>
+      <a href="#deliverable">Deliverable</a>
+      <a class="btn" href="#contact">Get a free episode</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="kicker lab rv"><i></i><span>Human episodes for robot learning</span></div>
+    <h1 class="rv d1">Training data<br>that <em>remembers.</em></h1>
+    <div class="hero-row rv d2">
+      <p>We want capable robots in people's lives as much as you do. Our part is the data for the one thing clips cannot teach: hours of real work, recorded start to finish, where what happened at minute 12 still matters at minute 120.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#contact">Get a free episode <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5"/></svg></a>
+        <a class="btn2" href="#test">See the test</a>
+      </div>
+    </div>
   </div>
 </header>
 
-<main id="top">
-  <section class="hero">
-    <div class="wrap">
-      <span class="pill"><i></i>Human episodes for robot learning</span>
-      <h1><span class="w"><span>Training data</span></span><br><span class="w"><span>that <em>remembers.</em></span></span></h1>
-      <div class="sub">
-        <p class="lede">Real work, recorded first-person from start to finish, with <b>every cause linked to its consequence</b>: the tray left soaking, the glasses parked on a shelf, the plan that changed when the trash filled up. So a model at minute 120 still knows what happened at minute 12.</p>
-        <div class="ctas">
-          <a class="btn pri" href="#contact">Get a free episode<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-          <a class="btn" href="#minute">See how it works</a>
-        </div>
+<section class="strip">
+  <div class="wrap rv d3">
+    <div class="strip-h">
+      <div><b>One episode</b><span>Reset a kitchen after a dinner for eight</span></div>
+      <div><span>Five things started, five things closed, hours apart</span><span style="display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:500"><i class="rec"></i>03:14:08</span></div>
+    </div>
+    <div class="tl" id="tl">
+      <div class="tl-svg">
+      <svg viewBox="0 0 1280 240" preserveAspectRatio="none" role="img" aria-label="Timeline of one three-hour episode with five arcs linking the moment something was started to the moment it was resolved">
+        <g stroke="#D9D2C3" stroke-width="1" stroke-dasharray="2 5" vector-effect="non-scaling-stroke">
+          <line x1="395.6" y1="30" x2="395.6" y2="200"/><line x1="791.2" y1="30" x2="791.2" y2="200"/><line x1="1186.8" y1="30" x2="1186.8" y2="200"/>
+        </g>
+        <line x1="0" y1="200" x2="1280" y2="200" stroke="#1B1A17" stroke-width="1" vector-effect="non-scaling-stroke"/>
+        <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="11" fill="#6E6A62">
+          <text x="0" y="226">0:00</text><text x="395.6" y="226" text-anchor="middle">1:00</text><text x="791.2" y="226" text-anchor="middle">2:00</text><text x="1186.8" y="226" text-anchor="middle">3:00</text><text x="1280" y="226" text-anchor="end">3:14</text>
+        </g>
+        <g stroke="#1B1A17" stroke-width="1.5" vector-effect="non-scaling-stroke">
+          <line x1="79" y1="188" x2="79" y2="200"/><line x1="198" y1="188" x2="198" y2="200"/><line x1="263.7" y1="188" x2="263.7" y2="200"/><line x1="390" y1="188" x2="390" y2="200"/><line x1="474.7" y1="188" x2="474.7" y2="200"/><line x1="540.7" y1="188" x2="540.7" y2="200"/><line x1="567" y1="188" x2="567" y2="200"/><line x1="633" y1="188" x2="633" y2="200"/><line x1="672.5" y1="188" x2="672.5" y2="200"/><line x1="758" y1="188" x2="758" y2="200"/><line x1="824" y1="188" x2="824" y2="200"/><line x1="989" y1="188" x2="989" y2="200"/><line x1="1055" y1="188" x2="1055" y2="200"/><line x1="1168.4" y1="188" x2="1168.4" y2="200"/>
+        </g>
+        <line x1="385.7" y1="178" x2="385.7" y2="200" stroke="#8C2F1B" stroke-width="2" vector-effect="non-scaling-stroke"/>
+        <g fill="none" stroke="#8C2F1B" stroke-width="1.5" vector-effect="non-scaling-stroke">
+          <path class="arc a1" pathLength="1" d="M1.6 200 C1.6 72 430.8 72 430.8 200"/>
+          <path class="arc a2" pathLength="1" d="M30.8 200 C30.8 29 705.5 29 705.5 200"/>
+          <path class="arc a3" pathLength="1" d="M146.2 200 C146.2 112 344 112 344 200"/>
+          <path class="arc a4" pathLength="1" d="M327.5 200 C327.5 7 1137.3 7 1137.3 200"/>
+          <path class="arc a5" pathLength="1" d="M912.1 200 C912.1 89 1246.2 89 1246.2 200"/>
+        </g>
+        <g fill="#8C2F1B">
+          <circle cx="1.6" cy="200" r="3.5"/><circle cx="430.8" cy="200" r="3.5"/><circle cx="30.8" cy="200" r="3.5"/><circle cx="705.5" cy="200" r="3.5"/><circle cx="146.2" cy="200" r="3.5"/><circle cx="344" cy="200" r="3.5"/><circle cx="327.5" cy="200" r="3.5"/><circle cx="1137.3" cy="200" r="3.5"/><circle cx="912.1" cy="200" r="3.5"/><circle cx="1246.2" cy="200" r="3.5"/>
+        </g>
+        <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="11.5" fill="#1B1A17" paint-order="stroke" stroke="#F7F3EA" stroke-width="5" stroke-linejoin="round">
+          <circle cx="216" cy="104" r="3" fill="#8C2F1B" stroke="none"/><text x="206" y="99" text-anchor="end">check the oven · 1 h 05 min</text>
+          <circle cx="368" cy="72" r="3" fill="#8C2F1B" stroke="none"/><text x="358" y="67" text-anchor="end">cream carton to the fridge · 1 h 42 min</text>
+          <circle cx="245" cy="134" r="3" fill="#8C2F1B" stroke="none"/><text x="235" y="129" text-anchor="end">scrub the tray · 30 min</text>
+          <circle cx="732" cy="55" r="3" fill="#8C2F1B" stroke="none"/><text x="742" y="50">glasses back to the cupboard · 2 h 03 min</text>
+          <circle cx="1079" cy="117" r="3" fill="#8C2F1B" stroke="none"/><text x="1089" y="112">tell the household · 51 min</text>
+        </g>
+        <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" fill="#6E6A62" paint-order="stroke" stroke="#F7F3EA" stroke-width="4" stroke-linejoin="round">
+          <text x="385.7" y="170" text-anchor="middle">plate dropped</text><text x="540.7" y="180" text-anchor="middle">phone</text><text x="633" y="180" text-anchor="middle">trash</text><text x="672.5" y="168" text-anchor="middle">replan</text>
+        </g>
+      </svg>
+      <div class="ph" aria-hidden="true"></div>
       </div>
-
-      <div class="inst" id="episode" aria-label="Illustrated episode log: world state, decision log, dependencies and a scrubbable 3 hour timeline">
-        <div class="inst-top">
-          <div class="grp">
-            <span class="rec"><i aria-hidden="true"></i>Rec</span>
-            <span>Episode 0412</span>
-            <span class="opt">Kitchen 07 · Run 23 of 24</span>
-            <span class="opt">Job: reset a kitchen after a dinner for eight</span>
-          </div>
-          <div class="grp"><span class="tc" id="tc">01:47:12</span><span class="opt">/ 03:14:08</span></div>
-        </div>
-        <div class="inst-main">
-          <div class="pane">
-            <div class="pane-h"><span>World state</span><b id="stateh">Phase 05 of 09</b></div>
-            <div class="pane-b"><div class="state" id="state"></div></div>
-          </div>
-          <div class="pane mid">
-            <div class="pane-h"><span>Decision log</span><b>Annotated at each branch</b></div>
-            <div class="pane-b"><ol class="log" id="log"></ol></div>
-          </div>
-          <div class="pane side">
-            <div class="pane-h"><span>Dependencies</span><b>Cause → consequence</b></div>
-            <div class="pane-b"><ul class="deps" id="deps"></ul></div>
-            <div class="cams">
-              <div class="pane-h"><span>Cameras</span><b>Synced · 30 fps</b></div>
-              <div class="pane-b">
-                <div class="cam"><i class="d" aria-hidden="true"></i><span class="n">Head</span><span class="v">1920×1080</span></div>
-                <div class="cam"><i class="d" aria-hidden="true"></i><span class="n">Wrist L</span><span class="v">1280×720</span></div>
-                <div class="cam"><i class="d" aria-hidden="true"></i><span class="n">Wrist R</span><span class="v">1280×720</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="inst-tl">
-          <canvas id="tl" tabindex="0" role="slider" aria-label="Episode timeline. Drag or use arrow keys to scrub." aria-valuemin="0" aria-valuemax="11648" aria-valuenow="6432"></canvas>
-        </div>
-      </div>
-      <div class="caption">
-        <span>Illustrated episode from our task design for a kitchen reset. Drag the timeline to scrub.</span>
-        <span>Arcs link a cause to its consequence. Amber arcs are still open.</span>
+      <div class="tl-axis" aria-hidden="true"><span>0:00</span><span>1:00</span><span>2:00</span><span>3:14</span></div>
+      <div class="tl-list">
+        <div><span>oven on → check the oven</span><span>1 h 05 min</span></div>
+        <div><span>carton on counter → to the fridge</span><span>1 h 42 min</span></div>
+        <div><span>tray soaking → scrub the tray</span><span>30 min</span></div>
+        <div><span>glasses on shelf → back to cupboard</span><span>2 h 03 min</span></div>
+        <div><span>bins full → tell the household</span><span>51 min</span></div>
       </div>
     </div>
-  </section>
+    <p class="strip-note">Each arc is a cause and its consequence, labeled at both ends and linked. Interruptions, mistakes and plan changes stay in.</p>
+  </div>
+</section>
 
-  <section class="sec" id="minute">
-    <div class="wrap">
-      <div class="sec-h rv">
-        <span class="lab">Minute by minute</span>
-        <h2>Clips capture actions. <em>Episodes capture consequences.</em></h2>
-        <p>Human video already transfers to robots, and the best policies now remember minutes of context. The open problem is hours: what was started, what is waiting, where things were put. <b>A clip is labeled for what happens inside it. It carries nothing about what it owes to the past.</b> Scroll through one episode and watch the state build up.</p>
-      </div>
-      <div class="scrolly">
-        <div class="steps-col" id="stepsCol">
-          <div class="stepc" data-step="0"><span class="t">00:22 · Wash by hand</span><h3>The tray goes in to soak.</h3><p>Nothing happens on screen for the next fourteen minutes. But an obligation just opened, and the model has to carry it.</p></div>
-          <div class="stepc" data-step="1"><span class="t">00:49 · Dry and put away</span><h3>Cupboard is full. Glasses go on a shelf for now.</h3><p>A temporary placement. From here, "where are the glasses?" has an answer only if you remember this moment.</p></div>
-          <div class="stepc" data-step="2"><span class="t">01:36 · Wipe counters</span><h3>Trash overflows. Counters get interrupted.</h3><p>The goal is suspended, not abandoned. The resume point is the right half of the counter, and it gets recorded.</p></div>
-          <div class="stepc" data-step="3"><span class="t">01:42 · Wipe counters</span><h3>Mopping now would mean walking on a wet floor. The plan changes.</h3><p>Fridge before floor. The original plan is now wrong, and the model needs to know why.</p></div>
-          <div class="stepc" data-step="4"><span class="t">02:52 · Final pass</span><h3>Cupboard has space. The glasses come back.</h3><p>Two hours and three minutes after they were parked. That link, from minute 49 to minute 172, is the product.</p></div>
-        </div>
-        <div class="sticky">
-          <div class="card" id="scard">
-            <div class="ch"><span>World state</span><b id="sc-t">00:22:10</b></div>
-            <div class="kv"><div class="k"><span>Current goal</span></div><ul id="sc-goal"></ul></div>
-            <div class="kv"><div class="k"><span>Suspended</span></div><ul id="sc-susp"></ul></div>
-            <div class="kv"><div class="k"><span>Open obligations</span></div><ul id="sc-obl"></ul></div>
-            <div class="kv"><div class="k"><span>Temporary placements</span></div><ul id="sc-pl"></ul></div>
-            <div class="note" id="sc-note"></div>
-          </div>
-        </div>
+<section class="sec" id="why">
+  <div class="wrap">
+    <div class="g12">
+      <div class="lab rv">01 &nbsp;Why episodes</div>
+      <div class="body">
+        <h2 class="rv">Clips capture actions.<br><em>Episodes capture consequences.</em></h2>
+        <p class="lede rv d1">Acting is solved. Planning is close. Keeping track across hours of real work is not, and a clip cannot teach it: a clip is labeled for what happens inside it, and carries nothing about what it owes to the past. That gap is the data we make.</p>
       </div>
     </div>
-  </section>
-
-  <section class="sec" id="levels">
-    <div class="wrap">
-      <div class="sec-h rv">
-        <span class="lab">Where the gap is</span>
-        <h2>Acting is solved. Planning is close. <em>Keeping track is not.</em></h2>
-        <p>A frontier model can write a good plan for a kitchen. The hard part is being 87 minutes into it and knowing the tray is still soaking, one glass is on a temporary shelf, and the stove was left half wiped when the trash filled up.</p>
+    <div class="compare">
+      <div class="cmp rv">
+        <div class="lab">A clip · 30 seconds</div>
+        <svg viewBox="0 0 616 90" role="img" aria-label="A three-hour baseline with a single two-pixel mark showing where a 30-second clip sits">
+          <line x1="0" y1="60" x2="616" y2="60" stroke="#1B1A17" stroke-width="1"/>
+          <rect x="300" y="44" width="2" height="16" fill="#8C2F1B"/>
+          <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="11" fill="#6E6A62"><text x="0" y="82">0:00</text><text x="616" y="82" text-anchor="end">3:14</text></g>
+        </svg>
+        <p>Two pixels wide at the scale of the job. Label: <code>"places cup on shelf"</code></p>
       </div>
-      <div class="levels">
-        <div class="lvl rv d1"><div class="t"><span>Seconds</span></div><h3>Act</h3><div class="q">What should I do right now?</div><p>Short, clean demonstrations. Well served by existing data.</p></div>
-        <div class="lvl rv d2"><div class="t"><span>Minutes</span></div><h3>Plan</h3><div class="q">What sequence gets this done?</div><p>Strong models exist, and memory now stretches to minutes.</p></div>
-        <div class="lvl next rv d3"><div class="t"><span>Hours</span><b>Ours</b></div><h3>Keep track</h3><div class="q">What happened, what changed, what is still owed?</div><p>A grounded state of the world, maintained while acting in it. This is the data we make.</p></div>
+      <div class="cmp rv d1">
+        <div class="lab">An episode · 3 h 14 min</div>
+        <svg viewBox="0 0 616 90" role="img" aria-label="The same baseline with three arcs linking placements to their later retrieval">
+          <line x1="0" y1="60" x2="616" y2="60" stroke="#1B1A17" stroke-width="1"/>
+          <g fill="none" stroke="#8C2F1B" stroke-width="1.5"><path d="M0.8 60 C0.8 10 207 10 207 60"/><path d="M14.8 60 C14.8 -4 339.5 -4 339.5 60"/><path d="M157.6 60 C157.6 -20 547 -20 547 60"/></g>
+          <g fill="#8C2F1B"><circle cx="0.8" cy="60" r="3"/><circle cx="207" cy="60" r="3"/><circle cx="14.8" cy="60" r="3"/><circle cx="339.5" cy="60" r="3"/><circle cx="157.6" cy="60" r="3"/><circle cx="547" cy="60" r="3"/></g>
+          <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="11" fill="#6E6A62"><text x="0" y="82">0:00</text><text x="616" y="82" text-anchor="end">3:14</text></g>
+        </svg>
+        <p>Every placement linked to its retrieval. Label: <code>"glasses back to the cupboard · parked 00:49:40"</code></p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="sec" id="design">
-    <div class="wrap">
-      <div class="sec-h rv">
-        <span class="lab">What we record</span>
-        <h2>Not hours of footage. <em>Events, hours apart, that depend on each other.</em></h2>
-        <p>Three hours of unrelated actions teaches nothing about memory. A 45-minute episode with a delayed consequence, an interruption, a retrieval, a plan change and a recovery teaches a lot. So we design every episode for those, and we annotate the state, not just the actions.</p>
-      </div>
+<section class="sec" id="record">
+  <div class="wrap g12">
+    <div class="lab rv">02 &nbsp;What we record</div>
+    <div class="body">
+      <h2 class="rv">Not hours of footage. <em>Events that depend on each other.</em></h2>
       <div class="rows">
-        <div class="rowd rv">
-          <h3>Delayed <em>consequences</em></h3>
-          <div class="body">
-            <p>Something done now matters later. The tray soaks, the oven heats, the boxes wait by the door. <b>Every episode contains several of these, 15 minutes to two hours apart,</b> with both ends labeled and linked.</p>
-            <div class="fig"><div class="spans" id="spans"></div><div class="axis"><span>0:00</span><span>1:00</span><span>2:00</span><span>3:00</span></div><div class="fig-note">Dependencies in the episode above, drawn to time.</div></div>
-          </div>
-        </div>
-        <div class="rowd rv">
-          <h3>Interruptions <em>and resumption</em></h3>
-          <div class="body">
-            <p>Real work is start A, interrupt for B, notice C, finish B, resume A. <b>We record the suspended goal, the resume point and the return,</b> so a model learns to pick up where it left off.</p>
-            <div class="ex" id="ex-int"></div>
-          </div>
-        </div>
-        <div class="rowd rv">
-          <h3>Temporary placements <em>and retrieval</em></h3>
-          <div class="body">
-            <p>The cupboard is full, so the glasses wait on a shelf. Two hours later they come back. <b>The placement opens an obligation; the retrieval closes it,</b> and the two records point at each other.</p>
-            <div class="ex" id="ex-place"></div>
-          </div>
-        </div>
-        <div class="rowd rv">
-          <h3>Failure <em>and recovery</em></h3>
-          <div class="body">
-            <p>The state after a mistake is one that clean demonstrations never reach. <b>We keep the states successful demos never visit, and the paths that return from them.</b> Nothing is re-shot.</p>
-            <div class="ex" id="ex-fail"></div>
-          </div>
-        </div>
-        <div class="rowd rv">
-          <h3>Same decision, <em>different runs</em></h3>
-          <div class="body">
-            <p>The same job in the same kitchen, 24 times, with the starting state changed on purpose. <b>You get a distribution of decisions from similar situations,</b> not one lucky run.</p>
-            <div class="fig"><div class="lab" style="margin-bottom:10px">Decision point: put the tall glasses away · Kitchen 07 · 24 runs</div><div class="br" id="branches"></div><div class="fig-note">Counts are from our run design for this kitchen and are illustrative.</div></div>
-          </div>
-        </div>
+        <div class="row rv"><h3>Delayed consequences</h3><p>The tray soaks, the oven heats, the boxes wait by the door. Both ends labeled and linked, fifteen minutes to two hours apart.</p></div>
+        <div class="row rv"><h3>Interruptions</h3><p>The phone rings, the trash overflows. We record the suspended goal, the resume point and the return.</p></div>
+        <div class="row rv"><h3>Temporary placements</h3><p>The cupboard is full, so the glasses wait on a shelf. The placement opens an obligation; the retrieval two hours later closes it.</p></div>
+        <div class="row rv"><h3>Mistakes and recovery</h3><p>The states clean demonstrations never reach, and the paths back from them. Nothing is re-shot.</p></div>
+        <div class="row rv"><h3>Repeats</h3><p>The same job in the same place, twenty or more times, with the starting state changed on purpose. A distribution of decisions, not one lucky run.</p></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="sec" id="annotation">
-    <div class="wrap">
-      <div class="sec-h rv">
-        <span class="lab">How it is annotated</span>
-        <h2>Not a running commentary. <em>A record at every branch.</em></h2>
-        <p>Continuous narration changes how people work and produces noise. Collectors mark decision points as they happen. We write each one up afterwards into a fixed schema and link it to the record it depends on.</p>
+<section class="sec" id="test">
+  <div class="wrap g12">
+    <div class="lab rv">03 &nbsp;The test</div>
+    <div class="body" style="gap:40px">
+      <h2 class="rv">Don't take our word for it. <em>We run the experiment on your free episode.</em></h2>
+      <div class="arms">
+        <div class="arm rv"><span class="n">A</span><h3>Short clips</h3><p>The same footage cut into 30 to 60 second clips, shuffled.</p></div>
+        <div class="arm rv d1"><span class="n">B</span><h3>Clips with a summary</h3><p>The same clips, each with a written summary of what came before.</p></div>
+        <div class="arm ours rv d2"><span class="n">C</span><h3>The full episode</h3><p>Full continuity plus our decision, obligation and state annotations.</p></div>
       </div>
-      <div class="recs">
-        <div class="recx rv d1">
-          <div class="h"><span>decisions.jsonl · <b>00:49:40</b></span><span>DECISION</span></div>
-          <dl><dt>goal</dt><dd>reset kitchen</dd><dt>subgoal</dt><dd>put tall glasses away</dd><dt>observation</dt><dd>cupboard above the kettle is full</dd><dt>constraint</dt><dd>glasses cannot go in their normal place</dd><dt>decision</dt><dd>temporary: open shelf by the window</dd><dt>obligation</dt><dd class="o">relocate glasses before finishing</dd><dt>action</dt><dd>place 4 glasses on shelf, t = 2980 to 3041</dd></dl>
-        </div>
-        <div class="recx rv d2">
-          <div class="h"><span>decisions.jsonl · <b>02:52:30</b></span><span>RETRIEVAL</span></div>
-          <dl><dt>goal</dt><dd>reset kitchen</dd><dt>subgoal</dt><dd>final pass</dd><dt>retrieved</dt><dd class="r">glasses on open shelf, since 00:49:40 (2 h 03 min)</dd><dt>observation</dt><dd>cupboard has space now the trays are out</dd><dt>decision</dt><dd>move glasses back to the cupboard</dd><dt>closes</dt><dd class="o">obligation from 00:49:40</dd><dt>action</dt><dd>carry and place, t = 10350 to 10402</dd></dl>
-        </div>
-        <div class="link-line rv d3"><svg width="28" height="14" viewBox="0 0 28 14" fill="none" stroke="#F2B84B" stroke-width="1.5"><path d="M2 12C2 3 26 3 26 12"/><circle cx="2" cy="12" r="1.8" fill="#F2B84B"/><circle cx="26" cy="12" r="1.8" fill="#F2B84B"/></svg><span>Two records, two hours apart, that only make sense together. <b>That link is what clip datasets do not have.</b></span></div>
-      </div>
+      <p class="verdict rv">Ask a model, at moments the current frame cannot answer: what is unfinished, where is the tray, what should I resume. <strong>If C wins, and wins by more as the gap widens, this data does something clips cannot.</strong> If it doesn't, you have lost nothing.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="sec" id="proof">
-    <div class="wrap">
-      <div class="sec-h rv">
-        <span class="lab">The test</span>
-        <h2>One experiment settles it. <em>We run it on your free episode.</em></h2>
-        <p>Nobody has shown whether keeping the continuity beats cutting the same footage into clips. It is a clean question, and you should not have to take our word for it.</p>
-      </div>
-      <div class="exp">
-        <div class="arm rv d1"><span class="n">A</span><h3>Short clips</h3><p>The same footage cut into 30 to 60 second clips, shuffled. No history.</p></div>
-        <div class="arm rv d2"><span class="n">B</span><h3>Clips with a summary</h3><p>The same clips, each with a written summary of what came before.</p></div>
-        <div class="arm rv d3"><span class="n">C</span><h3>The full episode</h3><p>Full continuity plus our decision, obligation and state annotations.</p></div>
-      </div>
-      <div class="exp-q">
-        <ul class="rv">
-          <li>What remains unfinished?</li>
-          <li>Where is the tray now, and why?</li>
-          <li>What should I resume after this interruption?</li>
-          <li>Which earlier action matters right now?</li>
-          <li>Has this subgoal already been completed?</li>
-          <li>What changed that made the plan wrong?</li>
-        </ul>
-        <div class="verdict rv d2">
-          <p>Ask a capable model these questions at moments where <b>the current frame is not enough to answer.</b> Compare the three arms as the distance from the relevant event grows.</p>
-          <div class="big">If A and C score the same, the thesis is weak. If C wins, and wins by more as the gap widens, this data does something clips cannot.</div>
-          <p>Whether that carries into robot task success is the second stage, and yours to run. The first stage needs no robot.</p>
-        </div>
-      </div>
+<section class="sec" id="deliverable">
+  <div class="wrap g12">
+    <div class="lab rv">04 &nbsp;What you get</div>
+    <h2 class="rv" style="grid-column:span 9">One folder per episode. <em>Your schema.</em></h2>
+    <div class="deliv" style="grid-column:span 12">
+<pre class="tree rv"><b>episode_0412/</b>
+├─ head.mp4          1920×1080 · 30 fps · 3 h 14 min
+├─ wrist_l.mp4       synced to head
+├─ wrist_r.mp4
+├─ decisions.jsonl   one record at every branch
+├─ state.jsonl       <i>goal · suspended · owed · where things are</i>
+├─ links.jsonl       <i>cause → consequence · fail → recover</i>
+├─ subtasks.jsonl    {t0, t1, phase, label}
+├─ hands.npz         21 keypoints × 2 hands, per frame
+└─ meta.json         run, initial state, consent, known gaps</pre>
+      <dl class="spec rv d1">
+        <div><dt>Formats</dt><dd>RLDS, LeRobot, or whatever you already use. We match your data before we scale.</dd></div>
+        <div><dt>Quality</dt><dd>Every episode reviewed by a second person. Gaps are listed, not hidden.</dd></div>
+        <div><dt>Consent</dt><dd>Written, from collector and household. Faces and documents blurred.</dd></div>
+        <div><dt>Sample</dt><dd><strong>One full episode, free,</strong> on a job you choose, with the A/B/C test run on it.</dd></div>
+      </dl>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="sec" id="how">
-    <div class="wrap">
-      <div class="sec-h rv">
-        <span class="lab">How an episode is made</span>
-        <h2>Designed, recorded, repeated, annotated.</h2>
-      </div>
-      <div class="steps">
-        <div class="step rv d1"><span class="n">01</span><h3>Design</h3><p>You pick the job and the environment. We design the episode to contain delayed consequences, at least one interruption, temporary placements and room for things to go wrong. 45 minutes to 4 hours, whatever the dependencies need.</p></div>
-        <div class="step rv d2"><span class="n">02</span><h3>Rig</h3><p>A head camera and one on each wrist, time-synced. Light enough that nobody works differently for wearing it.</p></div>
-        <div class="step rv d3"><span class="n">03</span><h3>Record</h3><p>The whole job, no cuts. Collectors mark decision points as they happen and otherwise work normally. When something goes wrong, they keep going. Nothing is re-shot.</p></div>
-        <div class="step rv d4"><span class="n">04</span><h3>Repeat</h3><p>The same home again with the starting state changed: a full cupboard, a blocked shelf, a person in the way. Then other homes. Twenty or more runs per place is normal.</p></div>
-        <div class="step rv d5"><span class="n">05</span><h3>Annotate</h3><p>Every decision point into a fixed schema, every obligation linked to its resolution, a state snapshot at each branch, subtask spans, hand keypoints. Checked by a second person before it ships.</p></div>
-      </div>
+<section class="contact" id="contact">
+  <div class="wrap g12">
+    <h2 class="rv">You are building the robots. <em>We'll get you the data faster.</em></h2>
+    <div class="side rv d1">
+      <p>Tell us the job and the environment. We record one full episode, annotate it, run the test and send you the folder. No cost, no call required.</p>
+      <p><b>We reply within five hours.</b></p>
     </div>
-  </section>
+    <div class="cta rv d2">
+      <a class="btn" href="mailto:bhuwansaik@gmail.com?subject=Free%20episode">Get a free episode <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5"/></svg></a>
+      <span class="mail"><a href="mailto:bhuwansaik@gmail.com" id="mail" style="text-decoration:none">bhuwansaik@gmail.com</a><button class="copy" id="copy" type="button" aria-label="Copy email address">Copy</button></span>
+    </div>
+  </div>
+</section>
 
-  <section class="sec" id="deliver">
-    <div class="wrap">
-      <div class="sec-h rv">
-        <span class="lab">What you get</span>
-        <h2>One folder per episode. <em>Nothing to guess at.</em></h2>
-      </div>
-      <div class="deliv">
-        <pre class="tree rv"><b>episode_0412/</b>
-├─ <b>head.mp4</b>          <i>1920×1080 · 30 fps · 3 h 14 min</i>
-├─ <b>wrist_l.mp4</b>       <i>1280×720 · synced to head</i>
-├─ <b>wrist_r.mp4</b>
-├─ <b>decisions.jsonl</b>   <i>{t, goal, subgoal, observation, constraint,</i>
-│                    <i>decision, obligation, resume, action}</i>
-├─ <b>state.jsonl</b>       <i>snapshot at every branch:</i>
-│                    <span class="k">current goal · suspended goals · open obligations</span>
-│                    <span class="k">temporary placements · completed subtasks</span>
-├─ <b>links.jsonl</b>       <span class="k">cause → consequence · fail → recover</span>
-│                    <span class="k">interrupt → resume · placement → retrieval</span>
-├─ <b>subtasks.jsonl</b>    <i>{t0, t1, phase, label}</i>
-├─ <b>hands.npz</b>         <i>21 keypoints × 2 hands, per frame</i>
-├─ <b>sync.json</b>         <i>per-camera offsets, dropped frames</i>
-└─ <b>meta.json</b>         <i>home_id, run_id, initial_state, collector_id, consent_id</i></pre>
-        <dl class="spec rv d1">
-          <div><dt>Formats</dt><dd><b>RLDS, LeRobot,</b> or the schema you already use. We match your existing data before we scale.</dd></div>
-          <div><dt>Decision records</dt><dd>One per branch, in a fixed schema. Marked by the collector at the moment, written up afterwards, never invented from the video alone.</dd></div>
-          <div><dt>State</dt><dd>A snapshot at every decision point: what is done, what is suspended, what is owed, what is where. This is the supervision signal for memory and resumption.</dd></div>
-          <div><dt>Links</dt><dd>Every obligation resolved to the record that closes it, every failure to its recovery, every interruption to its resume point.</dd></div>
-          <div><dt>Quality</dt><dd>Every episode reviewed by a second person. Sync drift, dropped frames and unannotated stretches are listed in <b>meta.json</b>, not hidden.</dd></div>
-          <div><dt>Consent and privacy</dt><dd>Written consent from the collector and the household. Bystander faces and documents blurred. Stricter rules on request.</dd></div>
-          <div><dt>Sample</dt><dd><b>One full episode, free,</b> on a job you choose, with the A/B/C comparison run on it.</dd></div>
-        </dl>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec" id="faq">
-    <div class="wrap">
-      <div class="sec-h rv">
-        <span class="lab">FAQ</span>
-        <h2>Things people ask on the first call.</h2>
-      </div>
-      <div class="faq rv">
-        <details><summary>Isn't this already covered by the big human-video datasets?</summary><div class="a">Partly, and we are glad they exist: they are the proof that human first-person video transfers to robots. They are far bigger and more diverse than anything we will collect, and they are clip-scale. <b>We are not competing on scale.</b> We design episodes so causes and consequences sit far apart in time, and we annotate the state in between. If you already have millions of clips, this is the data those clips do not contain.</div></details>
-        <details><summary>Do collectors talk the whole time?</summary><div class="a">No. Continuous narration changes how people work and most of it is noise. Collectors mark decision points as they happen and say a sentence at the branch. We write each one up afterwards into a fixed schema.</div></details>
-        <details><summary>Do you cut out the mistakes?</summary><div class="a">No. A dropped glass, a wrong cupboard, a plan that had to change: it stays in, and the recovery is linked to it. If you want a clean-only cut as well, we can deliver both.</div></details>
-        <details><summary>Who are the collectors?</summary><div class="a">People we recruit, train and pay ourselves, working in their own or partner homes. Our team is based in India, which is what makes repeated long episodes affordable. We can run in other countries when a project needs it.</div></details>
-        <details><summary>Can we choose the jobs and the environments?</summary><div class="a">Yes. Kitchens, laundry, whole-apartment cleaning, packing, restocking, a workshop, a small shop. You choose the job, the starting states you want varied, and how many homes and repeats. If a job is unusual we will tell you honestly whether we can do it well.</div></details>
-        <details><summary>How fast can we see data?</summary><div class="a">A sample episode within two weeks of a brief, with the A/B/C comparison. After that, delivery runs weekly.</div></details>
-        <details><summary>How is it priced?</summary><div class="a">Per delivered episode, with volume tiers. The sample is free. We put a number in writing before you commit to anything.</div></details>
-      </div>
-    </div>
-  </section>
-
-  <section class="contact" id="contact">
-    <div class="wrap g">
-      <div class="rv">
-        <h2>Which job should your robot learn to keep track of?</h2>
-        <p class="fnote">I'm Bhuwan. I've run data collection and annotation teams for AI labs, and I started Physical Data because the thing missing from robot data is not more clips. <b>It is the history between them.</b> Tell me the job, and we'll design the episode.</p>
-        <div class="sig">Bhuwan Sai Kosuru, founder</div>
-      </div>
-      <div class="ccard rv d2">
-        <span class="lab">Write to me directly</span>
-        <div class="mail"><code id="mail"><a href="mailto:bhuwansaik@gmail.com">bhuwansaik@gmail.com</a></code><button class="copy" id="copy" type="button">Copy</button></div>
-        <p>Tell us the job, the environment and the format you want. We reply within five hours with a plan for a free sample episode.</p>
-      </div>
-    </div>
-  </section>
-</main>
-<footer><div class="wrap row"><a class="brand" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4.5 16h23" stroke="currentColor" stroke-width="2"/><circle cx="4.5" cy="16" r="3" fill="#F2B84B"/><circle cx="27.5" cy="16" r="3" fill="#F2B84B"/></svg>Physical Data</a><span>© 2026 Physical Data · physicaldata.tech</span></div></footer>
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Physical Data, home">
+      <svg width="20" height="20" viewBox="0 0 64 64" fill="none" aria-hidden="true"><circle cx="32" cy="32" r="23" stroke="#1B1A17" stroke-width="4"/><path d="M9 32h46" stroke="#1B1A17" stroke-width="4" stroke-linecap="round"/><circle cx="9" cy="32" r="6" fill="#8C2F1B"/><circle cx="55" cy="32" r="6" fill="#8C2F1B"/></svg>
+      <span>Physical Data</span>
+    </a>
+    <div class="meta"><span>physicaldata.tech</span><span>Human episodes for robot learning</span><span>© 2026</span></div>
+  </div>
+</footer>
 
 <script>
-(()=>{
-'use strict';
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const $=id=>document.getElementById(id);
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* nav + copy */
-const nav=$('nav');addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>8),{passive:true});
-const copyBtn=$('copy');
-copyBtn.addEventListener('click',()=>{
-  const done=()=>{copyBtn.textContent='Copied';setTimeout(()=>copyBtn.textContent='Copy',1600)};
-  const sel=()=>{const r=document.createRange();r.selectNodeContents($('mail'));const s=getSelection();s.removeAllRanges();s.addRange(r)};
-  try{navigator.clipboard.writeText('bhuwansaik@gmail.com').then(done,sel)}catch(e){sel()}
-});
-
-/* reveals: hidden only after load, only when below the fold */
-if(!reduce&&'IntersectionObserver' in window){
-  const els=[...document.querySelectorAll('.rv')].filter(el=>el.getBoundingClientRect().top>innerHeight*.92);
-  els.forEach(el=>el.classList.add('pre'));
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('pre');e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -10% 0px'});
-  els.forEach(el=>io.observe(el));
-  document.querySelectorAll('.rv:not(.pre)').forEach(el=>el.classList.add('in'));
-}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}
-
-/* helpers */
-const LEN=3*3600+14*60+8;
-const fmt=v=>{v=Math.max(0,Math.floor(v));return [Math.floor(v/3600),Math.floor(v/60)%60,v%60].map(n=>String(n).padStart(2,'0')).join(':')};
-const pad2=n=>String(n).padStart(2,'0');
-const mins=s=>{const m=Math.round(s/60);return m>=60?`${Math.floor(m/60)} h ${pad2(m%60)} min`:`${m} min`};
-const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
-
-/* episode data */
-const PHASES=[[0,'Unload dishwasher'],[840,'Wash by hand'],[2520,'Dry and put away'],[3900,'Oven and stovetop'],[5400,'Wipe counters'],[6300,'Fridge reset'],[7800,'Trash and recycling'],[8700,'Floor'],[10200,'Final pass']];
-const phaseAt=t=>{let i=0;for(let p=0;p<PHASES.length;p++)if(t>=PHASES[p][0])i=p;return i};
-const phaseEnd=i=>i+1<PHASES.length?PHASES[i+1][0]:LEN;
-const OBL={
-  oven:{txt:'Check the oven'},
-  carton:{txt:'Cream carton to the fridge'},
-  tray:{txt:'Return to the soaking tray'},
-  glasses:{txt:'Relocate glasses before finishing',place:{obj:'Tall glasses',loc:'open shelf by the window'}},
-  grate:{txt:'Grate back on the stove',place:{obj:'Stovetop grate',loc:'sink'}},
-  boxes:{txt:'Tell the household about the boxes'}
-};
-const EV=[
- {t:15,k:'PLAN',sub:'Start',obs:'Oven cold, dishes stacked, table not cleared',dec:'Oven on first so it heats while I do the dishes. Then counters, floor, fridge, trash.',obl:'oven'},
- {t:250,k:'DECISION',sub:'Unload dishwasher',obs:'Cream carton is out on the table',dec:'Leave it. Dishes first.',obl:'carton'},
- {t:1330,k:'DECISION',sub:'Wash roasting tray',obs:'Baked-on grease',con:'Scrubbing now would take ten minutes',dec:'Soak it and come back.',obl:'tray'},
- {t:1705,k:'FAIL',sub:'Wash glasses',obs:'Glass slipped, hit the mat, not broken',dec:'Slow down. Dry hands first.'},
- {t:1760,k:'RECOVER',sub:'Wash glasses',dec:'Rinse it again. Rack it on its own so it does not knock the others.'},
- {t:2210,k:'RETRIEVE',sub:'Wash by hand',mem:'tray',obs:'Tray has soaked about fifteen minutes',dec:'Scrub it now, before draining the sink.'},
- {t:2980,k:'DECISION',sub:'Put tall glasses away',obs:'Cupboard above the kettle is full',con:'Glasses cannot go in their normal place',dec:'Temporary: open shelf by the window.',obl:'glasses'},
- {t:3920,k:'RETRIEVE',sub:'Oven and stovetop',mem:'oven',obs:'Oven has been on about an hour',dec:'Check it now.'},
- {t:4080,k:'FAIL',sub:'Oven tray',obs:'Grabbed the tray without the cloth',dec:'Dropped it back in. Getting the cloth.'},
- {t:4130,k:'RECOVER',sub:'Oven tray',dec:'Cloth on. Tray out, onto the trivet, not the counter.'},
- {t:4700,k:'DECISION',sub:'Stovetop',obs:'Grate is greasy',dec:'Soak it in the sink while I wipe.',obl:'grate'},
- {t:5810,k:'INTERRUPT',sub:'Wipe counters',obs:'Trash is full and keeps filling',con:'Counters cannot be finished with the trash overflowing',dec:'Take the trash out now.',resume:'Wipe counters, right half'},
- {t:6000,k:'RESUME',sub:'Wipe counters',dec:'Bag tied, new bag in. Back to the counters, right half.'},
- {t:6120,k:'DECISION',sub:'Wipe counters',obs:'Leftovers still on the table. Mopping now means walking over a wet floor to sort them',dec:'Fridge before the floor. Floor goes last.',replan:true},
- {t:6350,k:'RETRIEVE',sub:'Fridge reset',mem:'carton',obs:'Cream carton is still on the table',dec:'Fridge, now.'},
- {t:6900,k:'DECISION',sub:'Fridge reset',obs:'Three containers of leftovers',dec:'Glass boxes, labeled with the date.'},
- {t:7260,k:'FAIL',sub:'Fridge reset',obs:'Shelf slid out when I pulled the jar',dec:'Caught it.'},
- {t:7300,k:'RECOVER',sub:'Fridge reset',dec:'Shelf pushed all the way back. Jar out the slow way.'},
- {t:8300,k:'DECISION',sub:'Recycling',obs:'Bins outside are full',dec:'Flattened boxes stay by the door.',obl:'boxes'},
- {t:9350,k:'FAIL',sub:'Mop',obs:'Bucket caught the chair leg. Small spill',dec:'Towels from the drawer by the sink.'},
- {t:9410,k:'RECOVER',sub:'Mop',dec:'Floor dry. Chairs up on the table before carrying on.'},
- {t:10250,k:'RETRIEVE',sub:'Final pass',mem:'grate',obs:'Grate is still in the sink from 01:18',dec:'Rinse it and put it back on the stove.'},
- {t:10350,k:'RETRIEVE',sub:'Final pass',mem:'glasses',obs:'Cupboard has space now the trays are out',dec:'Glasses from the open shelf back into the cupboard.'},
- {t:11300,k:'RETRIEVE',sub:'Final pass',mem:'boxes',obs:'Boxes still by the door',dec:'Leaving a note on the counter.'},
- {t:11400,k:'DONE',sub:'Final pass',obs:'Lights, oven off, tap off, sink clear',dec:'Open obligations: none.'}
-].map((e,i)=>Object.assign(e,{i}));
-const DEPS=Object.keys(OBL).map(id=>{const from=EV.find(e=>e.obl===id),to=EV.find(e=>e.mem===id);return {id,txt:OBL[id].txt,place:OBL[id].place,from:from.t,to:to.t}});
-
-function worldState(t){
-  const p=phaseAt(t);
-  const open=DEPS.filter(d=>d.from<=t&&t<d.to);
-  const places=open.filter(d=>d.place);
-  const it=EV.filter(e=>e.k==='INTERRUPT'&&e.t<=t).pop();const rs=it?EV.find(e=>e.k==='RESUME'&&e.t>it.t):null;
-  const suspended=it&&(!rs||t<rs.t)?it:null;
-  const fails=EV.filter(e=>e.k==='FAIL'&&e.t<=t).length;
-  const closed=DEPS.filter(d=>d.to<=t).length;
-  return {p,open,places,suspended,fails,closed};
-}
-
-/* static figures */
-{
-  const it=EV.find(e=>e.k==='INTERRUPT'),rs=EV.find(e=>e.k==='RESUME');
-  $('ex-int').innerHTML=`<b>${fmt(it.t)}</b> <span class="a">interrupt</span> ${esc(it.obs)}. ${esc(it.dec)}<br><b>${fmt(it.t)}</b> <span class="a">suspended</span> ${esc(it.sub)} · resume at: ${esc(it.resume)}<br><b>${fmt(rs.t)}</b> <span class="a">resume</span> ${esc(rs.dec)} <span>(${rs.t-it.t} s later)</span>`;
-  const g=DEPS.find(d=>d.id==='glasses'),gr=EV.find(e=>e.t===g.to);
-  $('ex-place').innerHTML=`<b>${fmt(g.from)}</b> <span class="c">placed</span> ${esc(g.place.obj)} → ${esc(g.place.loc)}. Obligation opened: ${esc(g.txt)}<br><b>${fmt(g.to)}</b> <span class="c">retrieved</span> ${esc(gr.obs)}. ${esc(gr.dec)} <span>(${mins(g.to-g.from)} later)</span>`;
-  const fails=EV.filter(e=>e.k==='FAIL');
-  $('ex-fail').innerHTML=fails.map(f=>{const r=EV.find(x=>x.k==='RECOVER'&&x.t>f.t);return `<b>${fmt(f.t)}</b> <span class="r">fail</span> ${esc(f.obs)}. <span class="r">recover</span> ${esc(r.dec)} <span>(${r.t-f.t} s)</span>`}).join('<br>');
-  $('spans').innerHTML=DEPS.slice().sort((a,b)=>a.from-b.from).map(d=>`<div class="sprow${reduce?' static':''}"><span class="n">${esc(d.txt)}</span><div class="tr"><i style="left:${(d.from/LEN*100).toFixed(2)}%;width:${((d.to-d.from)/LEN*100).toFixed(2)}%"></i><s style="left:${(d.from/LEN*100).toFixed(2)}%"></s><u style="left:${(d.to/LEN*100).toFixed(2)}%"></u></div><span class="d">${mins(d.to-d.from)}</span></div>`).join('');
-  const B=[[9,'Cupboard full → glasses on a temporary shelf, relocated later','R02 R04 R07 R10 R12 R15 R18 R21 R23'],[6,'Cupboard has space → glasses go straight in','R01 R05 R09 R13 R17 R20'],[5,'Shelf also occupied → reorganize the cupboard first','R03 R08 R14 R19 R24'],[4,'Interrupted mid-placement → glass left safely, resumed 8 to 14 min later','R06 R11 R16 R22']];
-  $('branches').innerHTML=B.map((b,i)=>`<div class="brow${i?' alt':''}"><span class="c">${b[0]}</span><div><div class="t">${esc(b[1])}<small>${b[2]}</small></div><div class="bar"><i style="width:${(b[0]/24*100).toFixed(0)}%"></i></div></div></div>`).join('');
-}
-
-/* scrolly: sticky state card */
-{
-  const STEPS=[
-    {t:1340,note:'<b>Obligation opened.</b> Nothing visible for 14 minutes, then it matters.'},
-    {t:3000,note:'<b>Placement recorded.</b> "Where are the glasses?" now needs memory to answer.'},
-    {t:5820,note:'<b>Goal suspended.</b> Resume point saved: right half of the counters.'},
-    {t:6130,note:'<b>Plan reordered.</b> Fridge, trash, floor, final. The old order is now wrong.'},
-    {t:10360,note:'<b>Obligation closed</b> 2 h 03 min after it opened. The two records point at each other.'}
-  ];
-  const li=(cls,txt,small)=>`<li class="${cls} enter"><i></i><span>${esc(txt)}${small?`<small>${esc(small)}</small>`:''}</span></li>`;
-  let cur=-1;
-  function show(i){
-    if(i===cur)return;cur=i;const s=STEPS[i],w=worldState(s.t);
-    $('sc-t').textContent=fmt(s.t);
-    $('sc-goal').innerHTML=li('ok',PHASES[w.p][1],`phase ${pad2(w.p+1)} of ${pad2(PHASES.length)}`);
-    $('sc-susp').innerHTML=w.suspended?li('su',w.suspended.sub,'resume at: '+w.suspended.resume):'<li class="none">Nothing suspended</li>';
-    $('sc-obl').innerHTML=w.open.length?w.open.map(d=>li('',d.txt,`since ${fmt(d.from)} · ${mins(s.t-d.from)}`)).join(''):'<li class="none">None open</li>';
-    $('sc-pl').innerHTML=w.places.length?w.places.map(d=>li('pl',`${d.place.obj} → ${d.place.loc}`,`since ${fmt(d.from)}`)).join(''):'<li class="none">Everything in its place</li>';
-    $('sc-note').innerHTML=s.note;
-    document.querySelectorAll('.stepc').forEach((el,j)=>el.classList.toggle('on',j===i));
+  // reveal on scroll
+  var rv = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+  if(reduce || !('IntersectionObserver' in window)){
+    rv.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.05});
+    rv.forEach(function(el){ io.observe(el); });
   }
-  show(0);
-  if('IntersectionObserver' in window){
-    const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)show(+e.target.dataset.step)})},{rootMargin:'-45% 0px -45% 0px',threshold:0});
-    document.querySelectorAll('.stepc').forEach(el=>io.observe(el));
-  }
-}
 
-/* instrument */
-const S={t:1*3600+47*60+12,speed:48,playing:!reduce,drag:false};
-const stateEl=$('state');let stateKey='';
-function renderState(){
-  const w=worldState(S.t);
-  const key=[w.p,w.open.map(d=>d.id).join(),w.suspended?w.suspended.t:'',w.fails,w.closed].join('#');
-  if(key!==stateKey){
-    stateKey=key;
-    stateEl.innerHTML=`
-      <div class="sblk"><div class="k"><span>Current goal</span><b class="el"></b></div><div class="v">${esc(PHASES[w.p][1])}</div><div class="bar"><i class="pb"></i></div></div>
-      <div class="sblk"><div class="k"><span>Suspended</span><b>${w.suspended?'1':'0'}</b></div>${w.suspended?`<ul><li class="su"><i></i><span>${esc(w.suspended.sub)}<small>resume at: ${esc(w.suspended.resume)} · since ${fmt(w.suspended.t)}</small></span></li></ul>`:'<div class="v dim">Nothing suspended</div>'}</div>
-      <div class="sblk"><div class="k"><span>Open obligations</span><b>${w.open.length}</b></div>${w.open.length?`<ul>${w.open.map(d=>`<li><i></i><span>${esc(d.txt)}<small class="ob" data-from="${d.from}">since ${fmt(d.from)}</small></span></li>`).join('')}</ul>`:'<div class="v dim">None open</div>'}</div>
-      <div class="sblk"><div class="k"><span>Temporary placements</span><b>${w.places.length}</b></div>${w.places.length?`<ul>${w.places.map(d=>`<li class="pl"><i></i><span>${esc(d.place.obj)} → ${esc(d.place.loc)}<small>since ${fmt(d.from)}</small></span></li>`).join('')}</ul>`:'<div class="v dim">Everything in its place</div>'}</div>
-      <div class="sblk"><div class="k"><span>Closed</span><b>${w.closed} of ${DEPS.length} dependencies · ${w.fails} recoveries</b></div></div>`;
+  // draw the arcs when the strip is in view
+  var tl = document.getElementById('tl');
+  if(tl){
+    if(reduce || !('IntersectionObserver' in window)){ tl.classList.add('on'); }
+    else {
+      var io2 = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ tl.classList.add('on'); io2.disconnect(); } });
+      }, {threshold:0.3});
+      io2.observe(tl);
+    }
   }
-  const a=PHASES[w.p][0],b=phaseEnd(w.p);
-  stateEl.querySelector('.pb').style.width=((S.t-a)/(b-a)*100).toFixed(1)+'%';
-  stateEl.querySelector('.el').textContent=mins(S.t-a)+' in';
-  stateEl.querySelectorAll('.ob').forEach(el=>{el.textContent=`since ${fmt(+el.dataset.from)} · ${mins(S.t-el.dataset.from)}`});
-  $('stateh').textContent=`Phase ${pad2(w.p+1)} of ${pad2(PHASES.length)}`;
-}
-const logEl=$('log');let logIds=[];let typing=null;
-const LABEL={PLAN:'Plan',DECISION:'Decision',FAIL:'Failure',RECOVER:'Recovery',RETRIEVE:'Retrieval',INTERRUPT:'Interrupt',RESUME:'Resume',DONE:'Done'};
-function recHTML(e){
-  let rows='';
-  if(e.mem){const d=DEPS.find(x=>x.id===e.mem);rows+=`<dt>retrieved</dt><dd class="r">${esc(d.txt)} · since ${fmt(d.from)} (${mins(e.t-d.from)})</dd>`}
-  if(e.obs)rows+=`<dt>observation</dt><dd>${esc(e.obs)}</dd>`;
-  if(e.con)rows+=`<dt>constraint</dt><dd>${esc(e.con)}</dd>`;
-  rows+=`<dt>decision</dt><dd class="d"></dd>`;
-  if(e.obl)rows+=`<dt>obligation</dt><dd class="o">${esc(OBL[e.obl].txt)}</dd>`;
-  if(e.resume)rows+=`<dt>resume at</dt><dd class="o">${esc(e.resume)}</dd>`;
-  if(e.mem)rows+=`<dt>closes</dt><dd class="o">obligation from ${fmt(DEPS.find(x=>x.id===e.mem).from)}</dd>`;
-  if(e.replan)rows+=`<dt>plan</dt><dd class="o">reordered: fridge, trash, floor, final</dd>`;
-  return `<div class="m"><span>${fmt(e.t)}</span><b class="${e.k}">${LABEL[e.k]}</b><span>${esc(e.sub)}</span></div><dl class="f">${rows}</dl>`;
-}
-function renderLog(force){
-  const vis=EV.filter(e=>e.t<=S.t).slice(-5);
-  const ids=vis.map(e=>e.i);
-  const same=ids.length===logIds.length&&ids.every((v,i)=>v===logIds[i]);
-  if(same&&!force)return;
-  const append=!force&&ids.length&&logIds.length&&ids[ids.length-1]===logIds[logIds.length-1]+1;
-  logIds=ids;
-  if(typing){clearTimeout(typing);typing=null}
-  if(!append)logEl.innerHTML='';else{while(logEl.children.length>=5)logEl.removeChild(logEl.firstChild)}
-  const start=append?vis.length-1:0;
-  for(let i=start;i<vis.length;i++){
-    const e=vis[i];const li=document.createElement('li');li.className='rec-i';li.innerHTML=recHTML(e);
-    const d=li.querySelector('dd.d');
-    if(i===vis.length-1&&append&&!reduce){li.classList.add('new');let k=0;const s=e.dec;const tick=()=>{d.textContent=s.slice(0,++k);if(k<s.length)typing=setTimeout(tick,20);else{li.classList.remove('new');typing=null}};tick()}
-    else d.textContent=e.dec;
-    logEl.appendChild(li);
+
+  // copy email
+  var copy = document.getElementById('copy');
+  if(copy){
+    copy.addEventListener('click', function(){
+      var addr = document.getElementById('mail').textContent.trim();
+      function done(){ copy.textContent = 'Copied'; setTimeout(function(){ copy.textContent = 'Copy'; }, 1600); }
+      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(addr).then(done, done); }
+      else {
+        var ta = document.createElement('textarea'); ta.value = addr; document.body.appendChild(ta); ta.select();
+        try{ document.execCommand('copy'); }catch(err){}
+        document.body.removeChild(ta); done();
+      }
+    });
   }
-  [...logEl.children].forEach((li,i,a)=>{const age=a.length-1-i;li.className=li.className.replace(/old\d/g,'').trim();if(age>0)li.classList.add('old'+Math.min(age,4))});
-}
-const depsEl=$('deps');let depsKey='';
-function renderDeps(){
-  const key=DEPS.map(d=>S.t<d.from?'f':S.t<d.to?'o':S.t<d.to+400?'h':'c').join('');
-  if(key===depsKey)return;depsKey=key;
-  depsEl.innerHTML=DEPS.slice().sort((a,b)=>a.from-b.from).map(d=>{
-    const st=S.t<d.from?'future':S.t<d.to?'open':'closed';const hot=st==='closed'&&S.t<d.to+400;
-    return `<li class="${st}${hot?' hot':''}"><i></i><div><div class="w">${esc(d.txt)}</div><div class="s">${st==='future'?'not yet':st==='open'?`open since ${fmt(d.from)}`:`${fmt(d.from)} → ${fmt(d.to)}`}</div></div><span class="sp">${st==='future'?'':st==='open'?mins(S.t-d.from):mins(d.to-d.from)}</span></li>`}).join('');
-}
-const tl=$('tl');const DPR=Math.min(devicePixelRatio||1,2);
-function fit(c){const r=c.getBoundingClientRect();c.width=Math.max(2,Math.round(r.width*DPR));c.height=Math.max(2,Math.round(r.height*DPR))}
-fit(tl);addEventListener('resize',()=>{fit(tl);drawTL()});
-const COL={live:'#F2B84B',err:'#E0645C',cool:'#8FCBD6',ok:'#8FBF9A'};
-function drawTL(){
-  const c=tl,ctx=c.getContext('2d'),w=c.width,h=c.height,d=DPR;ctx.clearRect(0,0,w,h);
-  const X=t=>t/LEN*w;const narrow=w/d<640;
-  const yBase=h-22*d,yTop=narrow?14*d:26*d;
-  ctx.font=`${10*d}px "Geist Mono", ui-monospace, monospace`;ctx.textBaseline='top';
-  ctx.fillStyle='rgba(242,184,75,.05)';ctx.fillRect(0,0,X(S.t),h);
-  const arc=(x0,x1,hh,col,alpha,lw,dash)=>{ctx.strokeStyle=col;ctx.globalAlpha=alpha;ctx.lineWidth=lw;ctx.setLineDash(dash||[]);ctx.beginPath();ctx.moveTo(x0,yBase);ctx.bezierCurveTo(x0,yBase-hh*1.35,x1,yBase-hh*1.35,x1,yBase);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1};
-  DEPS.forEach(dp=>{
-    const span=Math.min(1,(dp.to-dp.from)/5000);const hh=(yBase-yTop-4*d)*(.3+.7*span);
-    arc(X(dp.from),X(dp.to),hh,COL.cool,.13,1);
-    if(S.t>=dp.to){const hot=S.t<dp.to+400;arc(X(dp.from),X(dp.to),hh,COL.cool,hot?.95:.4,hot?1.5:1)}
-    else if(S.t>=dp.from){const x1=X(S.t);const hh2=hh*Math.max(.15,(S.t-dp.from)/(dp.to-dp.from));arc(X(dp.from),x1,hh2,COL.live,.9,1.5,[3*d,3*d])}
-  });
-  PHASES.forEach((p,i)=>{const x=Math.round(X(p[0]))+.5;ctx.strokeStyle='rgba(236,233,226,.14)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,yTop-8*d);ctx.lineTo(x,yBase);ctx.stroke();
-    if(!narrow){const nx=i+1<PHASES.length?X(PHASES[i+1][0]):w;const name=p[1].toUpperCase();if(ctx.measureText(name).width<nx-x-12*d){ctx.fillStyle='#6E6C67';ctx.fillText(name,x+6*d,5*d)}}});
-  for(let t=0;t<=LEN;t+=300){const x=Math.round(X(t))+.5;const major=t%1800===0;ctx.strokeStyle=major?'rgba(236,233,226,.35)':'rgba(236,233,226,.14)';ctx.beginPath();ctx.moveTo(x,yBase);ctx.lineTo(x,yBase+(major?8:4)*d);ctx.stroke();
-    if(major&&(!narrow||t%3600===0)){ctx.fillStyle='#6E6C67';ctx.fillText(`${Math.floor(t/3600)}:${pad2(Math.floor(t/60)%60)}`,x+4*d,yBase+9*d)}}
-  ctx.strokeStyle='rgba(236,233,226,.2)';ctx.beginPath();ctx.moveTo(0,yBase+.5);ctx.lineTo(w,yBase+.5);ctx.stroke();
-  EV.forEach(e=>{const x=Math.round(X(e.t))+.5;let hgt=10,col='rgba(236,233,226,.55)',lw=1;
-    if(e.k==='FAIL'){hgt=18;col=COL.err;lw=2}else if(e.k==='INTERRUPT'||e.k==='RESUME'){hgt=16;col=COL.live;lw=2}else if(e.k==='RETRIEVE'){hgt=14;col=COL.cool;lw=1.5}else if(e.k==='DONE'){hgt=14;col=COL.ok;lw=2}
-    ctx.strokeStyle=col;ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(x,yBase);ctx.lineTo(x,yBase-hgt*d);ctx.stroke()});
-  ctx.lineWidth=1;
-  const px=Math.round(X(S.t))+.5;ctx.strokeStyle=COL.live;ctx.beginPath();ctx.moveTo(px,yTop-10*d);ctx.lineTo(px,h);ctx.stroke();
-  ctx.fillStyle=COL.live;ctx.beginPath();ctx.moveTo(px-5*d,yTop-10*d);ctx.lineTo(px+5*d,yTop-10*d);ctx.lineTo(px,yTop-4*d);ctx.closePath();ctx.fill();
-  const lab=fmt(S.t);const tw=ctx.measureText(lab).width+10*d;let lx=px+8*d;if(lx+tw>w)lx=px-8*d-tw;
-  ctx.fillStyle='#0A0C10';ctx.fillRect(lx,yTop-4*d,tw,14*d);ctx.strokeStyle=COL.live;ctx.strokeRect(lx+.5,yTop-4*d+.5,tw,14*d);ctx.fillStyle=COL.live;ctx.fillText(lab,lx+5*d,yTop-2*d);
-  tl.setAttribute('aria-valuenow',String(Math.floor(S.t)));
-}
-function scrubTo(clientX){const r=tl.getBoundingClientRect();S.t=Math.min(1,Math.max(0,(clientX-r.left)/r.width))*LEN;renderAll(true)}
-tl.addEventListener('pointerdown',e=>{S.drag=true;S.playing=false;tl.setPointerCapture(e.pointerId);scrubTo(e.clientX)});
-tl.addEventListener('pointermove',e=>{if(S.drag)scrubTo(e.clientX)});
-const endDrag=()=>{if(S.drag){S.drag=false;S.playing=!reduce}};
-tl.addEventListener('pointerup',endDrag);tl.addEventListener('pointercancel',endDrag);
-tl.addEventListener('keydown',e=>{const step=e.shiftKey?600:60;if(e.key==='ArrowRight')S.t=Math.min(LEN,S.t+step);else if(e.key==='ArrowLeft')S.t=Math.max(0,S.t-step);else if(e.key===' ')S.playing=!S.playing;else return;e.preventDefault();renderAll(true)});
-const tcEl=$('tc');
-function renderAll(force){renderLog(force);renderState();renderDeps();drawTL();tcEl.textContent=fmt(S.t)}
-let lastT=performance.now(),lastDraw=0;
-function loop(now){
-  const dt=Math.min(.1,(now-lastT)/1000);lastT=now;
-  if(S.playing){S.t+=dt*S.speed;if(S.t>=LEN){S.t=0;logIds=[];logEl.innerHTML='';stateKey='';depsKey=''}}
-  if(now-lastDraw>40){renderAll(false);lastDraw=now}
-  requestAnimationFrame(loop);
-}
-renderAll(true);
-if(!reduce)requestAnimationFrame(loop);
 })();
 </script>
 </body>
