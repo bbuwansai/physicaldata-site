@@ -59,24 +59,22 @@ em{font-style:italic}
 .links .btn,.links .btn:hover{height:38px;padding:0 16px;font-size:14px;color:var(--paper);border-radius:7px}
 
 /* hero */
-.hero{min-height:100vh;min-height:100svh;padding:160px 0 64px;display:flex;align-items:center}
-.hero .wrap{width:100%;display:flex;flex-direction:column;gap:44px}
-.kicker{display:flex;align-items:center;gap:18px}
-.kicker i{display:inline-block;width:24px;height:1px;background:var(--ink3)}
-.kicker .rec{display:inline-flex;align-items:center;gap:8px;color:var(--ink)}
-.rdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);animation:blink 1.4s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-.hero h1{font-weight:600;font-size:clamp(60px,9.4vw,136px);line-height:.94;letter-spacing:-.05em;max-width:1200px}
-.hero h1 .hl{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
+.hero{position:relative;min-height:100vh;min-height:100svh;padding:140px 0 64px;display:flex;align-items:center;overflow:hidden;background:var(--paper)}
+.hero .field{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero:after{content:"";position:absolute;inset:0;background:radial-gradient(75% 85% at 30% 50%,rgba(255,255,255,.94) 28%,rgba(255,255,255,0) 72%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;gap:36px}
+.hero h1{font-weight:600;font-size:clamp(46px,7.2vw,104px);line-height:.96;letter-spacing:-.05em;max-width:1240px}
+.hero h1 .hl{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
 .hero h1 .hl>span{display:block}
 .hero h1 em{font-style:normal;color:var(--ink3)}
 .hero h1 .dot{color:var(--accent)}
-.hero-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;align-items:end;padding-top:8px}
-.hero-row p{grid-column:span 7;font-size:20px;line-height:1.5;color:var(--ink2);text-wrap:pretty}
-.hero-cta{grid-column:9/span 4;display:flex;gap:12px;justify-content:flex-end}
-.scroll-hint{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.hero .motto{font-size:clamp(20px,2vw,28px);font-weight:500;letter-spacing:-.02em;line-height:1.3;color:var(--ink);max-width:720px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.scroll-hint{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding-top:20px}
 .scroll-hint i{display:inline-block;width:1px;height:36px;background:var(--ink3);transform-origin:top;animation:drop 1.8s cubic-bezier(.2,.7,.2,1) infinite}
 @keyframes drop{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.rdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
 /* episode: scroll-driven scene */
 .ep{position:relative;height:340vh;border-top:1px solid var(--rule2)}
@@ -244,12 +242,9 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
   .links a:not(.btn){display:none}
   .brand span{font-size:16px}
   .links .btn,.links .btn:hover{padding:0 14px}
-  .kicker .rec{display:none}
-  .hero{padding:120px 0 48px;min-height:0}
-  .hero .wrap{gap:30px}
-  .hero-row{display:flex;flex-direction:column;align-items:flex-start;gap:24px}
-  .hero-row p{font-size:19px}
-  .hero-cta{justify-content:flex-start;flex-wrap:wrap}
+  .hero{padding:112px 0 48px;min-height:0}
+  .hero .wrap{gap:26px}
+  .hero:after{background:radial-gradient(90% 70% at 40% 45%,rgba(255,255,255,.94) 30%,rgba(255,255,255,0) 80%)}
   .ep{height:280vh}
   .ep-sticky{padding:88px 0 24px;gap:18px;justify-content:flex-start}
   .ep-h{flex-direction:column;align-items:flex-start;gap:10px}
@@ -308,20 +303,18 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
 </nav>
 
 <header class="hero" id="top">
+  <canvas class="field" id="field" aria-hidden="true"></canvas>
   <div class="wrap">
-    <div class="kicker lab hf"><i></i><span>Fast-tracking the path to general-purpose robots</span><span class="rec"><i class="rdot"></i><span id="rec">REC 00:00:00</span></span></div>
     <h1>
-      <span class="hl"><span>Copy that.</span></span>
-      <span class="hl"><span><em>All of it<span class="dot">.</span></em></span></span>
+      <span class="hl"><span><em>Clips make demos.</em></span></span>
+      <span class="hl"><span>Episodes make robots<span class="dot">.</span></span></span>
     </h1>
-    <div class="hero-row hf">
-      <p>Robots learn from clips. People learn from the whole job. We record humans doing real work, start to finish, every cause linked to its consequence, so a model at minute 120 still knows what happened at minute 12. We want general-purpose robots in people's lives as much as you do. This is the data that fast-tracks the path there.</p>
-      <div class="hero-cta">
-        <a class="btn mag" href="#contact" data-open>Get a free episode <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5"/></svg></a>
-        <a class="btn2" href="#test">See the test</a>
-      </div>
+    <p class="motto hf">Fast-tracking the path to general-purpose robots.</p>
+    <div class="hero-cta hf">
+      <a class="btn mag" href="#contact" data-open>Get a free episode <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5"/></svg></a>
+      <a class="btn2" href="#episode">Play one episode</a>
     </div>
-    <div class="scroll-hint hf"><i></i><span>Scroll to play one episode</span></div>
+    <div class="scroll-hint hf"><i></i><span>Scroll</span></div>
   </div>
 </header>
 
@@ -386,7 +379,7 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
           <div class="pg"><span>Last decision</span><div class="last" id="p-last"><b>00:00:00</b>Recording starts.</div></div>
         </div>
       </div>
-      <div class="ep-note"><span>Each arc is a cause and its consequence, labeled at both ends and linked. Interruptions, mistakes and plan changes stay in.</span><span class="bar"><i id="pbar"></i></span></div>
+      <div class="ep-note"><span>Each arc: a cause and its consequence, linked.</span><span class="bar"><i id="pbar"></i></span></div>
     </div>
   </div>
 </section>
@@ -396,8 +389,7 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
     <div class="g12">
       <div class="lab rv">01 &nbsp;Why episodes</div>
       <div class="body">
-        <h2 class="t rv">Clips capture actions.<br><em>Episodes capture consequences.</em></h2>
-        <p class="lede rv">Acting is solved. Planning is close. Keeping track across hours of real work is not, and a clip cannot teach it: a clip is labeled for what happens inside it, and carries nothing about what it owes to the past. That gap is the data we make.</p>
+        <h2 class="t rv">A clip knows what happened inside it. <em>Nothing about what it owes to the past.</em></h2>
       </div>
     </div>
     <div class="compare">
@@ -409,7 +401,7 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
           <rect x="300" y="44" width="2" height="16" fill="#6B8FFF"/>
           <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="11" fill="#9A9A97"><text x="0" y="82">0:00</text><text x="616" y="82" text-anchor="end">3:14</text></g>
         </svg>
-        <p>Two pixels wide at the scale of the job. Label: <code>"places cup on shelf"</code></p>
+        <p>Label: <code>"places cup on shelf"</code></p>
       </div>
       <div class="cmp rv">
         <div class="lab">An episode</div>
@@ -420,7 +412,7 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
           <g fill="#6B8FFF"><circle cx="0.8" cy="60" r="3"/><circle cx="207" cy="60" r="3"/><circle cx="14.8" cy="60" r="3"/><circle cx="339.5" cy="60" r="3"/><circle cx="157.6" cy="60" r="3"/><circle cx="547" cy="60" r="3"/></g>
           <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="11" fill="#9A9A97"><text x="0" y="82">0:00</text><text x="616" y="82" text-anchor="end">3:14</text></g>
         </svg>
-        <p>Every placement linked to its retrieval. Label: <code>"glasses back to the cupboard · parked 00:49:40"</code></p>
+        <p>Label: <code>"glasses back to the cupboard · parked 00:49:40"</code></p>
       </div>
     </div>
   </div>
@@ -438,11 +430,11 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
     <div class="body">
       <h2 class="t rv">Not hours of footage. <em>Events that depend on each other.</em></h2>
       <div class="rows">
-        <div class="row rv"><h3>Delayed consequences</h3><div class="b"><p>The tray soaks, the oven heats, the boxes wait by the door. Both ends labeled and linked, fifteen minutes to two hours apart.</p><div class="ex">00:00:15 oven on <b>→</b> 01:05:20 check the oven</div></div></div>
-        <div class="row rv"><h3>Interruptions</h3><div class="b"><p>The phone rings, the trash overflows. We record the suspended goal, the resume point and the return.</p><div class="ex">01:36:00 counters, suspended <b>→</b> 01:38:40 resume, right half</div></div></div>
-        <div class="row rv"><h3>Temporary placements</h3><div class="b"><p>The cupboard is full, so the glasses wait on a shelf. The placement opens an obligation; the retrieval two hours later closes it.</p><div class="ex">00:49:40 glasses → open shelf <b>→</b> 02:52:30 back to the cupboard</div></div></div>
-        <div class="row rv"><h3>Mistakes and recovery</h3><div class="b"><p>The states clean demonstrations never reach, and the paths back from them. Nothing is re-shot.</p><div class="ex">00:58:30 plate dropped <b>→</b> 00:59:10 sweep, carry on</div></div></div>
-        <div class="row rv"><h3>Repeats</h3><div class="b"><p>The same job in the same place, twenty or more times, with the starting state changed on purpose. A distribution of decisions, not one lucky run.</p><div class="ex">24 runs · tall glasses: cupboard 14 <b>·</b> shelf 7 <b>·</b> counter 3</div></div></div>
+        <div class="row rv"><h3>Delayed consequences</h3><div class="b"><p>Oven on at 00:00. Checked at 01:05. Both ends linked.</p><div class="ex">00:00:15 oven on <b>→</b> 01:05:20 check the oven</div></div></div>
+        <div class="row rv"><h3>Interruptions</h3><div class="b"><p>The phone rings mid-task. The pause, the resume point, the return.</p><div class="ex">01:36:00 counters, suspended <b>→</b> 01:38:40 resume, right half</div></div></div>
+        <div class="row rv"><h3>Temporary placements</h3><div class="b"><p>Glasses parked on a shelf. Back in the cupboard two hours later.</p><div class="ex">00:49:40 glasses → open shelf <b>→</b> 02:52:30 back to the cupboard</div></div></div>
+        <div class="row rv"><h3>Mistakes and recovery</h3><div class="b"><p>The plate drops. Nothing is re-shot.</p><div class="ex">00:58:30 plate dropped <b>→</b> 00:59:10 sweep, carry on</div></div></div>
+        <div class="row rv"><h3>Repeats</h3><div class="b"><p>Same job, same kitchen, 24 runs, different starting states.</p><div class="ex">24 runs · tall glasses: cupboard 14 <b>·</b> shelf 7 <b>·</b> counter 3</div></div></div>
       </div>
     </div>
   </div>
@@ -452,13 +444,13 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
   <div class="wrap g12">
     <div class="lab rv">03 &nbsp;The test</div>
     <div class="body" style="gap:44px">
-      <h2 class="t rv">Don't take our word for it. <em>We run the experiment on your free episode.</em></h2>
+      <h2 class="t rv">Don't take our word for it. <em>We run the test on your free episode.</em></h2>
       <div class="arms">
         <div class="arm rv"><span class="n">A</span><h3>Short clips</h3><p>The same footage cut into 30 to 60 second clips, shuffled.</p></div>
         <div class="arm rv"><span class="n">B</span><h3>Clips with a summary</h3><p>The same clips, each with a written summary of what came before.</p></div>
         <div class="arm ours rv"><span class="n">C</span><h3>The full episode</h3><p>Full continuity plus our decision, obligation and state annotations.</p></div>
       </div>
-      <p class="verdict rv">Ask a model, at moments the current frame cannot answer: what is unfinished, where is the tray, what should I resume. <strong>If C wins, and wins by more as the gap widens, this data does something clips cannot.</strong> If it doesn't, you have lost nothing.</p>
+      <p class="verdict rv"><strong>If C wins, and wins by more as the gap widens, this data does something clips cannot.</strong> If it doesn't, you lost nothing.</p>
     </div>
   </div>
 </section>
@@ -469,12 +461,7 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
     <h2 class="t rv" style="grid-column:span 9">One folder per episode. <em>Your schema.</em></h2>
     <div class="deliv" style="grid-column:span 12">
 <pre class="tree" id="tree"><span><b>episode_0412/</b></span><span>├─ head.mp4          1920×1080 · 30 fps · 3 h 14 min</span><span>├─ wrist_l.mp4       synced to head</span><span>├─ wrist_r.mp4</span><span>├─ decisions.jsonl   one record at every branch</span><span>├─ state.jsonl       <i>goal · suspended · owed · where things are</i></span><span>├─ links.jsonl       <i>cause → consequence · fail → recover</i></span><span>├─ subtasks.jsonl    {t0, t1, phase, label}</span><span>├─ hands.npz         21 keypoints × 2 hands, per frame</span><span>└─ meta.json         run, initial state, consent, known gaps</span></pre>
-      <dl class="spec rv">
-        <div><dt>Formats</dt><dd>RLDS, LeRobot, or whatever you already use. We match your data before we scale.</dd></div>
-        <div><dt>Quality</dt><dd>Every episode reviewed by a second person. Gaps are listed, not hidden.</dd></div>
-        <div><dt>Consent</dt><dd>Written, from collector and household. Faces and documents blurred.</dd></div>
-        <div><dt>Sample</dt><dd><strong>One full episode, free,</strong> on a job you choose, with the A/B/C test run on it.</dd></div>
-      </dl>
+      <div class="spec-note rv" style="grid-column:8/span 5;display:flex;flex-direction:column;gap:14px;font-size:18px;line-height:1.5;color:var(--ink2)"><p>RLDS, LeRobot, or the schema you already use.</p><p>Reviewed by a second person. Gaps listed, not hidden.</p><p><strong style="color:var(--ink);font-weight:600">One full episode, free,</strong> with the test run on it.</p></div>
     </div>
   </div>
 </section>
@@ -483,13 +470,12 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
   <div class="wrap g12">
     <h2 class="rv">Tell us the job. <em>Copy that.</em></h2>
     <div class="side rv">
-      <p>Name the job and the environment. We record one full episode in it, annotate it, run the test and send you the folder. No cost, no call required.</p>
-      <p><b>We reply within five hours.</b></p>
+      <p>One free episode on a job you choose. <b>We reply within five hours.</b></p>
       <p class="motto" style="font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding-top:8px">Fast-tracking the path to general-purpose robots</p>
     </div>
     <div class="cta rv">
       <button class="btn mag" type="button" data-open>Get a free episode <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 8h11M9 3l5 5-5 5"/></svg></button>
-      <span class="hint">Three fields. No account, no call.</span>
+      <span class="hint">Three fields. No call.</span>
     </div>
   </div>
 </section>
@@ -620,7 +606,7 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
   if (!hasGsap || reduce){
     // play the episode on a timer instead of scroll, and show everything
     var t0=0; setInterval(function(){ t0=(t0+40)%T; render(t0); }, 40);
-    document.getElementById('rec').textContent='REC';
+    startField(true);
     return wireForm();
   }
 
@@ -641,8 +627,7 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
   });
 
   /* ---------- hero ---------- */
-  var recEl=document.getElementById('rec'), recT=0;
-  setInterval(function(){ recT++; recEl.textContent='REC '+fmt(recT); }, 1000);
+  startField(false);
   gsap.set('.hero .hl > span', {yPercent:110});
   gsap.set('.hero .hf', {opacity:0, y:16});
   gsap.timeline({defaults:{ease:'power4.out'}})
@@ -681,6 +666,47 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
   }
 
   wireForm();
+
+  /* ---------- hero background: a field of episodes on tape ---------- */
+  function startField(staticOnly){
+    var c=document.getElementById('field'); if(!c) return;
+    var ctx=c.getContext('2d'); if(!ctx) return;
+    var W=0,H=0,dpr=1,tracks=[],last=0,mx=0,my=0,tx=0,ty=0,running=true,px=0;
+    function build(){
+      tracks=[]; var n = W<900?7:11;
+      for(var i=0;i<n;i++){
+        var y=H*(0.06+0.88*i/(n-1)), arcs=[], x=-300+Math.random()*200;
+        while(x<W*1.6){ var span=70+Math.random()*440; x+=30+Math.random()*240; arcs.push({x:x, s:span, h:Math.min(100,10+span*0.24), b:Math.random()<0.2}); x+=span*0.35; }
+        tracks.push({y:y, a:arcs, v:9+Math.random()*9});
+      }
+    }
+    function resize(){ dpr=Math.min(2,window.devicePixelRatio||1); W=c.clientWidth; H=c.clientHeight; c.width=W*dpr; c.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); px=W*(W<900?0.7:0.62); build(); draw(0); }
+    function arcPath(a,y){ ctx.moveTo(a.x,y); ctx.bezierCurveTo(a.x,y-a.h*1.333,a.x+a.s,y-a.h*1.333,a.x+a.s,y); }
+    function draw(dt){
+      ctx.clearRect(0,0,W,H);
+      tx+=(mx-tx)*0.06; ty+=(my-ty)*0.06;
+      ctx.save(); ctx.translate(tx,ty);
+      // future: faint
+      ctx.lineWidth=1; ctx.strokeStyle='#E4E4E1'; ctx.beginPath();
+      tracks.forEach(function(tr){ tr.a.forEach(function(a){ a.x-=tr.v*dt; if(a.x+a.s<-60){ var mx2=0; tr.a.forEach(function(o){ if(o.x+o.s>mx2) mx2=o.x+o.s; }); a.x=mx2+40+Math.random()*240; a.s=70+Math.random()*440; a.h=Math.min(100,10+a.s*0.24); a.b=Math.random()<0.2; } arcPath(a,tr.y); }); });
+      ctx.stroke();
+      // past: solid, clipped to the left of the playhead
+      ctx.save(); ctx.beginPath(); ctx.rect(-tx-10,-ty-10,px+tx+10,H+20); ctx.clip();
+      ctx.strokeStyle='#B8B8B4'; ctx.beginPath(); tracks.forEach(function(tr){ tr.a.forEach(function(a){ if(!a.b) arcPath(a,tr.y); }); }); ctx.stroke();
+      ctx.strokeStyle='rgba(42,91,255,.7)'; ctx.lineWidth=1.25; ctx.beginPath(); tracks.forEach(function(tr){ tr.a.forEach(function(a){ if(a.b) arcPath(a,tr.y); }); }); ctx.stroke();
+      ctx.fillStyle='rgba(42,91,255,.85)'; tracks.forEach(function(tr){ tr.a.forEach(function(a){ if(a.b){ ctx.beginPath(); ctx.arc(a.x,tr.y,2.4,0,6.283); ctx.arc(a.x+a.s,tr.y,2.4,0,6.283); ctx.fill(); } }); });
+      ctx.restore();
+      ctx.restore();
+      // playhead
+      ctx.strokeStyle='rgba(11,11,11,.22)'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(px+0.5,0); ctx.lineTo(px+0.5,H); ctx.stroke();
+    }
+    function frame(now){ if(!running) return; var dt=last?Math.min(0.05,(now-last)/1000):0; last=now; draw(dt); requestAnimationFrame(frame); }
+    resize(); window.addEventListener('resize', resize);
+    if(staticOnly) return;
+    c.parentNode.addEventListener('mousemove', function(e){ var r=c.getBoundingClientRect(); mx=(e.clientX-r.left-W/2)*0.03; my=(e.clientY-r.top-H/2)*0.03; });
+    if('IntersectionObserver' in window){ new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting && !running){ running=true; last=0; requestAnimationFrame(frame); } else if(!e.isIntersecting){ running=false; } }); },{threshold:0.02}).observe(c); }
+    requestAnimationFrame(frame);
+  }
 
   /* ---------- contact form dialog ---------- */
   function wireForm(){
