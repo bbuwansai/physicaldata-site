@@ -1,10 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 96" width="420" height="96">
-  <rect width="420" height="96" fill="#0A0C10"/>
-  <g transform="translate(24,16)">
-    <circle cx="32" cy="32" r="23" fill="none" stroke="#F1EEE8" stroke-width="4"/>
-    <path d="M9 32h46" stroke="#F1EEE8" stroke-width="4" stroke-linecap="round"/>
-    <circle cx="9" cy="32" r="6" fill="#F2B84B"/>
-    <circle cx="55" cy="32" r="6" fill="#F2B84B"/>
-  </g>
-  <text x="104" y="60" font-family="Geist, Helvetica Neue, Helvetica, Arial, sans-serif" font-size="34" font-weight="600" letter-spacing="-0.8" fill="#F1EEE8">Copy That Labs</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="96" viewBox="0 0 520 96" fill="none"><g transform="translate(16 16)"><path d="M46.47 48.38A20 20 0 1 1 46.47 15.62" stroke="#0B0B0B" stroke-width="5" stroke-linecap="round"/><path d="M41.31 41.01A11 11 0 1 1 41.31 22.99" stroke="#0B0B0B" stroke-width="5" stroke-linecap="round"/><circle cx="35" cy="32" r="5" fill="#2A5BFF"/></g><text x="100" y="62" font-family="Geist, system-ui, Helvetica, Arial, sans-serif" font-size="44" font-weight="600" letter-spacing="-1.5" fill="#0B0B0B">Copy That Labs</text></svg>

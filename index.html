@@ -10,19 +10,19 @@
 <meta property="og:description" content="Copy that. All of it. Human episodes for robot learning: hours of real work, recorded start to finish, with every cause linked to its consequence.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://copythatlabs.com/">
-<meta name="theme-color" content="#F7F3EA">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F7F3EA'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%231B1A17' stroke-width='4'/%3E%3Cpath d='M11 32h42' stroke='%231B1A17' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='11' cy='32' r='6' fill='%238C2F1B'/%3E%3Ccircle cx='53' cy='32' r='6' fill='%238C2F1B'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Crect width='64' height='64' rx='14' fill='%230B0B0B'/%3E%3Cg transform='translate(32 32) scale(0.78) translate(-32 -32)'%3E%3Cpath d='M46.47 48.38A20 20 0 1 1 46.47 15.62' stroke='%23FFFFFF' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M41.31 41.01A11 11 0 1 1 41.31 22.99' stroke='%23FFFFFF' stroke-width='5' stroke-linecap='round'/%3E%3Ccircle cx='35' cy='32' r='5' fill='%236B8FFF'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#F7F3EA; --surface:#FFFDF8; --ink:#1B1A17; --ink2:#3A3833; --ink3:#6E6A62;
-  --rule:#1B1A17; --rule2:#DED8CB; --edge:#B8B2A4; --accent:#8C2F1B;
-  --dark:#141413; --dark2:#1E1D1A; --cream:#F7F3EA; --cream2:#A8A39A; --dline:#2E2C28; --accent-d:#E0674A;
-  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
-  --sans:'Instrument Sans',system-ui,'Segoe UI',Helvetica,sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --paper:#FFFFFF; --surface:#F6F6F4; --ink:#0B0B0B; --ink2:#4A4A48; --ink3:#7A7A78;
+  --rule:#0B0B0B; --rule2:#E6E6E3; --edge:#D6D6D2; --accent:#2A5BFF;
+  --dark:#0A0A0A; --dark2:#141414; --cream:#FFFFFF; --cream2:#9A9A97; --dline:#262626; --accent-d:#6B8FFF;
+  --serif:'Geist',system-ui,'Segoe UI',Helvetica,Arial,sans-serif;
+  --sans:'Geist',system-ui,'Segoe UI',Helvetica,Arial,sans-serif;
+  --mono:'Geist Mono',ui-monospace,Menlo,Consolas,monospace;
   --gutter:80px; --maxw:1280px;
 }
 *{box-sizing:border-box}
@@ -38,54 +38,54 @@ h1,h2,h3,p{margin:0}
 em{font-style:italic}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
 .lab{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
-.grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.055;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.03;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-.btn{position:relative;display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 22px;background:var(--ink);color:var(--paper);border:0;border-radius:6px;font:inherit;font-size:16px;font-weight:500;text-decoration:none;cursor:pointer;white-space:nowrap;transition:background .25s,color .25s}
+.btn{position:relative;display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 22px;background:var(--ink);color:var(--paper);border:0;border-radius:8px;font:inherit;font-size:16px;font-weight:500;text-decoration:none;cursor:pointer;white-space:nowrap;transition:background .25s,color .25s}
 .btn:hover{background:var(--accent)}
 .btn svg{transition:transform .25s}
 .btn:hover svg{transform:translateX(3px)}
-.btn2{display:inline-flex;align-items:center;height:52px;padding:0 22px;border:1px solid var(--edge);color:var(--ink);border-radius:6px;font:inherit;font-size:16px;font-weight:500;text-decoration:none;background:none;cursor:pointer;white-space:nowrap;transition:border-color .25s}
+.btn2{display:inline-flex;align-items:center;height:50px;padding:0 22px;border:1px solid var(--edge);color:var(--ink);border-radius:8px;font:inherit;font-size:16px;font-weight:500;text-decoration:none;background:none;cursor:pointer;white-space:nowrap;transition:border-color .25s}
 .btn2:hover{border-color:var(--ink)}
 
 /* nav */
-.nav{position:fixed;top:0;left:0;right:0;z-index:40;background:rgba(247,243,234,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:40;background:rgba(255,255,255,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--rule2);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
 .nav.hide{transform:translateY(-100%)}
-.nav .wrap{height:72px;display:flex;align-items:center;justify-content:space-between}
+.nav .wrap{height:68px;display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
-.brand span{font-family:var(--serif);font-size:24px;letter-spacing:-.01em;white-space:nowrap}
+.brand span{font-weight:600;font-size:17px;letter-spacing:-.02em;white-space:nowrap}
 .links{display:flex;align-items:center;gap:36px}
 .links a{font-size:14px;font-weight:500;text-decoration:none;color:var(--ink2);transition:color .2s}
 .links a:hover{color:var(--accent)}
-.links .btn,.links .btn:hover{height:40px;padding:0 18px;font-size:14px;color:var(--paper)}
+.links .btn,.links .btn:hover{height:38px;padding:0 16px;font-size:14px;color:var(--paper);border-radius:7px}
 
 /* hero */
 .hero{min-height:100vh;min-height:100svh;padding:160px 0 64px;display:flex;align-items:center}
 .hero .wrap{width:100%;display:flex;flex-direction:column;gap:44px}
 .kicker{display:flex;align-items:center;gap:18px}
-.kicker i{display:inline-block;width:32px;height:1px;background:var(--ink)}
+.kicker i{display:inline-block;width:24px;height:1px;background:var(--ink3)}
 .kicker .rec{display:inline-flex;align-items:center;gap:8px;color:var(--ink)}
 .rdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);animation:blink 1.4s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(68px,11vw,164px);line-height:.9;letter-spacing:-.035em;max-width:1200px}
+.hero h1{font-weight:600;font-size:clamp(60px,9.4vw,136px);line-height:.94;letter-spacing:-.05em;max-width:1200px}
 .hero h1 .hl{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
 .hero h1 .hl>span{display:block}
-.hero h1 em{font-style:italic}
+.hero h1 em{font-style:normal;color:var(--ink3)}
 .hero h1 .dot{color:var(--accent)}
 .hero-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;align-items:end;padding-top:8px}
-.hero-row p{grid-column:span 7;font-size:22px;line-height:1.45;color:var(--ink2);text-wrap:pretty}
+.hero-row p{grid-column:span 7;font-size:20px;line-height:1.5;color:var(--ink2);text-wrap:pretty}
 .hero-cta{grid-column:9/span 4;display:flex;gap:12px;justify-content:flex-end}
 .scroll-hint{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
 .scroll-hint i{display:inline-block;width:1px;height:36px;background:var(--ink3);transform-origin:top;animation:drop 1.8s cubic-bezier(.2,.7,.2,1) infinite}
 @keyframes drop{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* episode: scroll-driven scene */
-.ep{position:relative;height:340vh;border-top:1px solid var(--rule)}
+.ep{position:relative;height:340vh;border-top:1px solid var(--rule2)}
 .ep-sticky{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;gap:28px;padding:96px 0 40px}
-.ep-h{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+.ep-h{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-bottom:16px;border-bottom:1px solid var(--rule2)}
 .ep-h .l{display:flex;flex-direction:column;gap:6px}
 .ep-h .l b{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
-.ep-h .l span{font-family:var(--serif);font-size:28px;line-height:1;letter-spacing:-.01em}
-.ep-h .tc{font-family:var(--mono);font-size:44px;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:14px}
+.ep-h .l span{font-weight:500;font-size:24px;line-height:1.1;letter-spacing:-.02em}
+.ep-h .tc{font-family:var(--mono);font-size:40px;line-height:1;letter-spacing:-.03em;font-weight:500;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:14px}
 .ep-h .tc small{font-size:13px;color:var(--ink3);letter-spacing:.06em}
 .ep-g{display:flex;flex-direction:column;gap:24px}
 .tl{padding-top:8px}
@@ -105,7 +105,7 @@ em{font-style:italic}
 .panel .pg{display:flex;flex-direction:column;gap:10px;min-width:0}
 .panel .pg>span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cream2);display:flex;justify-content:space-between;gap:12px}
 .panel .pg>span b{color:var(--cream);font-weight:500}
-.panel .goal{font-family:var(--serif);font-size:30px;line-height:1.05;letter-spacing:-.01em;color:var(--cream)}
+.panel .goal{font-family:var(--sans);font-weight:500;font-size:24px;line-height:1.1;letter-spacing:-.02em;color:var(--cream)}
 .panel ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
 .panel li{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px solid var(--dline)}
 .panel li:last-child{border-bottom:0}
@@ -116,7 +116,7 @@ em{font-style:italic}
 .panel .foot{margin-top:auto;display:flex;gap:24px;color:var(--cream2);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding-top:10px}
 .panel .foot b{color:var(--cream);font-weight:500}
 .ep-note{display:flex;justify-content:space-between;align-items:center;gap:24px;font-size:15px;color:var(--ink3)}
-.ep-note .bar{flex:1;height:1px;background:var(--rule2);position:relative;max-width:320px}
+.ep-note .bar{flex:1;height:1px;background:var(--edge);position:relative;max-width:320px}
 .ep-note .bar i{position:absolute;left:0;top:-1px;height:3px;width:0;background:var(--ink)}
 
 /* dark contrast block */
@@ -124,55 +124,56 @@ em{font-style:italic}
 .dark .lab{color:var(--cream2)}
 .dark h2{color:var(--cream)}
 .dark .lede{color:var(--cream2)}
-.dark .cmp{border-top-color:var(--cream)}
+.dark h2.t em{color:var(--cream2)}
+.dark .cmp{border-top-color:var(--dline)}
 .dark .cmp p{color:var(--cream2)}
 .dark .cmp code{color:var(--cream)}
 
 /* sections */
-.sec{padding:128px 0;border-top:1px solid var(--rule)}
+.sec{padding:128px 0;border-top:1px solid var(--rule2)}
 .g12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:48px}
 .g12 .lab{grid-column:span 3;padding-top:10px}
 .g12 .body{grid-column:span 9;display:flex;flex-direction:column;gap:32px}
-h2.t{font-family:var(--serif);font-weight:400;font-size:clamp(42px,5vw,72px);line-height:.98;letter-spacing:-.025em;max-width:960px;text-wrap:pretty}
-h2.t em{font-style:italic}
-.lede{font-size:20px;line-height:1.5;color:var(--ink2);max-width:720px;text-wrap:pretty}
+h2.t{font-weight:600;font-size:clamp(38px,4.4vw,60px);line-height:1.02;letter-spacing:-.04em;max-width:900px;text-wrap:pretty}
+h2.t em{font-style:normal;color:var(--ink3)}
+.lede{font-size:19px;line-height:1.55;color:var(--ink2);max-width:680px;text-wrap:pretty}
 
 .compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px;row-gap:40px;margin-top:72px}
-.cmp{display:flex;flex-direction:column;gap:16px;padding-top:20px;border-top:1px solid var(--rule)}
+.cmp{display:flex;flex-direction:column;gap:16px;padding-top:20px;border-top:1px solid var(--rule2)}
 .cmp svg{display:block;width:100%;height:auto;overflow:visible}
 .cmp svg line,.cmp svg path{vector-effect:non-scaling-stroke}
 .cmp p{font-size:17px;color:var(--ink2)}
 .cmp code{font-family:var(--mono);font-size:13.5px;color:var(--ink)}
-.cmp .big{font-family:var(--serif);font-size:56px;line-height:1;letter-spacing:-.02em}
+.cmp .big{font-weight:600;font-size:48px;line-height:1;letter-spacing:-.04em}
 
 /* marquee */
-.mq{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);overflow:hidden;padding:18px 0;background:var(--paper)}
+.mq{border-top:1px solid var(--rule2);border-bottom:1px solid var(--rule2);overflow:hidden;padding:16px 0;background:var(--surface)}
 .mq-in{display:flex;width:max-content;gap:0;animation:mq 46s linear infinite}
 .mq:hover .mq-in{animation-play-state:paused}
-.mq span{font-family:var(--serif);font-size:30px;line-height:1;letter-spacing:-.01em;padding:0 28px;white-space:nowrap;display:flex;align-items:center;gap:28px}
+.mq span{font-weight:500;font-size:22px;line-height:1;letter-spacing:-.02em;color:var(--ink2);padding:0 26px;white-space:nowrap;display:flex;align-items:center;gap:28px}
 .mq span:after{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent)}
 @keyframes mq{to{transform:translateX(-50%)}}
 
 /* record rows */
-.rows{display:flex;flex-direction:column;border-top:1px solid var(--rule)}
+.rows{display:flex;flex-direction:column;border-top:1px solid var(--rule2)}
 .row{display:grid;grid-template-columns:320px 1fr;column-gap:32px;padding:26px 0;border-bottom:1px solid var(--rule2);align-items:baseline;position:relative;transition:padding-left .35s cubic-bezier(.2,.7,.2,1)}
 .row:before{content:"";position:absolute;left:0;top:0;bottom:-1px;width:0;background:var(--ink);transition:width .35s cubic-bezier(.2,.7,.2,1)}
 .row:hover{padding-left:20px}
 .row:hover:before{width:2px}
-.row h3{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.1}
+.row h3{font-weight:500;font-size:24px;line-height:1.15;letter-spacing:-.02em}
 .row .b{display:flex;flex-direction:column;gap:10px}
-.row p{font-size:17px;color:var(--ink2)}
+.row p{font-size:17px;line-height:1.55;color:var(--ink2)}
 .row .ex{font-family:var(--mono);font-size:12.5px;color:var(--ink3);max-height:0;overflow:hidden;opacity:0;transition:max-height .4s cubic-bezier(.2,.7,.2,1),opacity .3s}
 .row:hover .ex{max-height:60px;opacity:1}
 .row .ex b{color:var(--accent);font-weight:500}
 
 /* test */
 .arms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:24px;row-gap:32px}
-.arm{display:flex;flex-direction:column;gap:12px;padding-top:20px;border-top:1px solid var(--rule)}
+.arm{display:flex;flex-direction:column;gap:12px;padding-top:20px;border-top:1px solid var(--rule2)}
 .arm.ours{border-top:2px solid var(--accent)}
-.arm .n{font-family:var(--serif);font-size:48px;line-height:1;color:var(--edge)}
+.arm .n{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--ink3)}
 .arm.ours .n{color:var(--accent)}
-.arm h3{font-size:19px;font-weight:600}
+.arm h3{font-size:20px;font-weight:600;letter-spacing:-.02em}
 .arm p{font-size:16px;color:var(--ink2)}
 .verdict{font-size:20px;line-height:1.5;color:var(--ink2);max-width:840px;text-wrap:pretty}
 .verdict strong{color:var(--ink);font-weight:600}
@@ -183,7 +184,7 @@ h2.t em{font-style:italic}
 .tree span{display:block}
 .tree b{font-weight:500;color:var(--cream)}
 .tree i{font-style:normal;color:var(--accent-d)}
-.spec{grid-column:8/span 5;display:flex;flex-direction:column;border-top:1px solid var(--rule)}
+.spec{grid-column:8/span 5;display:flex;flex-direction:column;border-top:1px solid var(--rule2)}
 .spec div{display:grid;grid-template-columns:110px 1fr;column-gap:20px;padding:18px 0;border-bottom:1px solid var(--rule2);font-size:16px}
 .spec div:last-child{border-bottom:0}
 .spec dt{font-weight:600}
@@ -191,35 +192,37 @@ h2.t em{font-style:italic}
 .spec dd strong{color:var(--ink);font-weight:600}
 
 /* contact */
-.contact{padding:140px 0 100px;border-top:1px solid var(--rule)}
-.contact h2{grid-column:span 8;font-family:var(--serif);font-weight:400;font-size:clamp(52px,7vw,104px);line-height:.96;letter-spacing:-.035em;text-wrap:pretty}
+.contact{padding:140px 0 100px;border-top:1px solid var(--rule2);background:var(--surface)}
+.contact h2{grid-column:span 8;font-weight:600;font-size:clamp(44px,6vw,88px);line-height:.98;letter-spacing:-.05em;text-wrap:pretty}
+.contact h2 em{font-style:normal;color:var(--ink3)}
 .contact .side{grid-column:9/span 4;display:flex;flex-direction:column;gap:16px;font-size:18px;color:var(--ink2);padding-top:14px}
 .contact .side b{color:var(--ink);font-weight:500}
-.contact .cta{grid-column:span 12;display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding-top:32px;border-top:1px solid var(--rule2)}
-.contact .cta .btn{height:60px;padding:0 28px;font-size:17px}
+.contact .cta{grid-column:span 12;display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding-top:32px;border-top:1px solid var(--edge)}
+.contact .cta .btn{height:56px;padding:0 26px;font-size:17px}
 .contact .cta .hint{font-family:var(--mono);font-size:13px;color:var(--ink3)}
 
 footer{border-top:1px solid var(--rule2)}
 footer .wrap{height:80px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--ink3)}
-footer .brand span{font-size:18px}
+footer .brand span{font-size:15px}
 footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter-spacing:.04em}
 
 /* dialog */
-.dlg{width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 32px);margin:auto;padding:0;border:1px solid var(--rule);border-radius:8px;background:var(--surface);color:var(--ink);box-shadow:0 30px 80px rgba(27,26,23,.18);overflow:auto}
-.dlg::backdrop{background:rgba(20,20,19,.5);backdrop-filter:blur(3px)}
+.dlg{width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 32px);margin:auto;padding:0;border:1px solid var(--rule2);border-radius:12px;background:var(--surface);color:var(--ink);box-shadow:0 30px 80px rgba(27,26,23,.18);overflow:auto}
+.dlg::backdrop{background:rgba(10,10,10,.5);backdrop-filter:blur(3px)}
 .dlg[open]{animation:pop .3s cubic-bezier(.2,.7,.2,1)}
 @keyframes pop{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
 .form,.form-ok{padding:32px 36px 36px;display:flex;flex-direction:column;gap:18px}
 .form-h{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
-.form-h h3,.form-ok h3{font-family:var(--serif);font-weight:400;font-size:40px;line-height:1;letter-spacing:-.02em}
-.x{flex-shrink:0;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;background:none;border:1px solid var(--edge);border-radius:6px;color:var(--ink2);cursor:pointer;transition:border-color .2s,color .2s}
+.form-h h3,.form-ok h3{font-weight:600;font-size:30px;line-height:1.05;letter-spacing:-.03em}
+.form-h h3 em,.form-ok h3 em{font-style:normal;color:var(--ink3)}
+.x{flex-shrink:0;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;background:none;border:1px solid var(--edge);border-radius:8px;color:var(--ink2);cursor:pointer;transition:border-color .2s,color .2s}
 .x:hover{border-color:var(--ink);color:var(--ink)}
 .form-p{font-size:16px;color:var(--ink2)}
 .field{display:flex;flex-direction:column;gap:8px}
 .field span{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
-.field input,.field textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid var(--edge);border-radius:6px;padding:0 14px;height:48px;width:100%;transition:border-color .2s,box-shadow .2s}
+.field input,.field textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid var(--edge);border-radius:8px;padding:0 14px;height:48px;width:100%;transition:border-color .2s,box-shadow .2s}
 .field textarea{height:auto;min-height:120px;padding:12px 14px;resize:vertical;line-height:1.45}
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(27,26,23,.08)}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(11,11,11,.06)}
 .field input[aria-invalid="true"],.field textarea[aria-invalid="true"]{border-color:var(--accent)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .form-f{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:6px;flex-wrap:wrap}
@@ -239,7 +242,7 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
 @media (max-width:900px){
   :root{--gutter:24px}
   .links a:not(.btn){display:none}
-  .brand span{font-size:21px}
+  .brand span{font-size:16px}
   .links .btn,.links .btn:hover{padding:0 14px}
   .kicker .rec{display:none}
   .hero{padding:120px 0 48px;min-height:0}
@@ -292,7 +295,7 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
 <nav class="nav" id="nav">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Copy That Labs, home">
-      <svg width="26" height="26" viewBox="0 0 64 64" fill="none" aria-hidden="true"><circle cx="32" cy="32" r="23" stroke="#1B1A17" stroke-width="4"/><path d="M9 32h46" stroke="#1B1A17" stroke-width="4" stroke-linecap="round"/><circle cx="9" cy="32" r="6" fill="#8C2F1B"/><circle cx="55" cy="32" r="6" fill="#8C2F1B"/></svg>
+      <svg width="26" height="26" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M46.47 48.38A20 20 0 1 1 46.47 15.62" stroke="#0B0B0B" stroke-width="5" stroke-linecap="round"/><path d="M41.31 41.01A11 11 0 1 1 41.31 22.99" stroke="#0B0B0B" stroke-width="5" stroke-linecap="round"/><circle cx="35" cy="32" r="5" fill="#2A5BFF"/></svg>
       <span>Copy That Labs</span>
     </a>
     <div class="links">
@@ -333,40 +336,40 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
         <div class="tl" id="tl">
           <div class="tl-svg">
           <svg viewBox="0 0 1280 380" preserveAspectRatio="none" role="img" aria-label="Timeline of one three-hour episode; five arcs link the moment something was started to the moment it was resolved">
-            <g stroke="#D9D2C3" stroke-width="1" stroke-dasharray="2 5">
+            <g stroke="#E6E6E3" stroke-width="1" stroke-dasharray="2 5">
               <line x1="395.6" y1="40" x2="395.6" y2="330"/><line x1="791.2" y1="40" x2="791.2" y2="330"/><line x1="1186.8" y1="40" x2="1186.8" y2="330"/>
             </g>
-            <line x1="0" y1="330" x2="1280" y2="330" stroke="#1B1A17" stroke-width="1"/>
-            <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="11" fill="#6E6A62">
+            <line x1="0" y1="330" x2="1280" y2="330" stroke="#0B0B0B" stroke-width="1"/>
+            <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="11" fill="#7A7A78">
               <text x="0" y="358">0:00</text><text x="395.6" y="358" text-anchor="middle">1:00</text><text x="791.2" y="358" text-anchor="middle">2:00</text><text x="1186.8" y="358" text-anchor="middle">3:00</text><text x="1280" y="358" text-anchor="end">3:14</text>
             </g>
-            <g stroke="#1B1A17" stroke-width="1.5" id="ticks">
+            <g stroke="#0B0B0B" stroke-width="1.5" id="ticks">
               <line class="tick" data-t="720" x1="79" y1="316" x2="79" y2="330"/><line class="tick" data-t="1800" x1="198" y1="316" x2="198" y2="330"/><line class="tick" data-t="2400" x1="263.7" y1="316" x2="263.7" y2="330"/><line class="tick" data-t="3550" x1="390" y1="316" x2="390" y2="330"/><line class="tick" data-t="4320" x1="474.7" y1="316" x2="474.7" y2="330"/><line class="tick" data-t="4920" x1="540.7" y1="316" x2="540.7" y2="330"/><line class="tick" data-t="5160" x1="567" y1="316" x2="567" y2="330"/><line class="tick" data-t="5760" x1="633" y1="316" x2="633" y2="330"/><line class="tick" data-t="6120" x1="672.5" y1="316" x2="672.5" y2="330"/><line class="tick" data-t="6900" x1="758" y1="316" x2="758" y2="330"/><line class="tick" data-t="7500" x1="824" y1="316" x2="824" y2="330"/><line class="tick" data-t="9000" x1="989" y1="316" x2="989" y2="330"/><line class="tick" data-t="9600" x1="1055" y1="316" x2="1055" y2="330"/><line class="tick" data-t="10632" x1="1168.4" y1="316" x2="1168.4" y2="330"/>
-              <line class="tick" data-t="3510" x1="385.7" y1="302" x2="385.7" y2="330" stroke="#8C2F1B" stroke-width="2"/>
+              <line class="tick" data-t="3510" x1="385.7" y1="302" x2="385.7" y2="330" stroke="#2A5BFF" stroke-width="2"/>
             </g>
             <clipPath id="cp"><rect id="cpr" x="0" y="-20" width="0" height="400"/></clipPath>
-            <g fill="none" stroke="#8C2F1B" stroke-width="1.5" clip-path="url(#cp)">
+            <g fill="none" stroke="#2A5BFF" stroke-width="1.5" clip-path="url(#cp)">
               <path class="arc" data-t1="15" data-t2="3920" pathLength="1" d="M1.6 330 C1.6 117 430.8 117 430.8 330"/>
               <path class="arc" data-t1="280" data-t2="6420" pathLength="1" d="M30.8 330 C30.8 43 705.5 43 705.5 330"/>
               <path class="arc" data-t1="1330" data-t2="3130" pathLength="1" d="M146.2 330 C146.2 183 344 183 344 330"/>
               <path class="arc" data-t1="2980" data-t2="10350" pathLength="1" d="M327.5 330 C327.5 -3 1137.3 -3 1137.3 330"/>
               <path class="arc" data-t1="8300" data-t2="11340" pathLength="1" d="M912.1 330 C912.1 150 1246.2 150 1246.2 330"/>
             </g>
-            <g fill="#8C2F1B" id="dots">
+            <g fill="#2A5BFF" id="dots">
               <circle class="tick" data-t="15" cx="1.6" cy="330" r="3.5"/><circle class="tick" data-t="3920" cx="430.8" cy="330" r="3.5"/>
               <circle class="tick" data-t="280" cx="30.8" cy="330" r="3.5"/><circle class="tick" data-t="6420" cx="705.5" cy="330" r="3.5"/>
               <circle class="tick" data-t="1330" cx="146.2" cy="330" r="3.5"/><circle class="tick" data-t="3130" cx="344" cy="330" r="3.5"/>
               <circle class="tick" data-t="2980" cx="327.5" cy="330" r="3.5"/><circle class="tick" data-t="10350" cx="1137.3" cy="330" r="3.5"/>
               <circle class="tick" data-t="8300" cx="912.1" cy="330" r="3.5"/><circle class="tick" data-t="11340" cx="1246.2" cy="330" r="3.5"/>
             </g>
-            <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="11.5" paint-order="stroke" stroke="#F7F3EA" stroke-width="5" stroke-linejoin="round" id="lbls">
-              <g class="lbl" data-t1="15" data-t2="3920"><circle cx="216" cy="170" r="3" fill="#8C2F1B" stroke="none"/><text x="226" y="165">check the oven · 1 h 05 min</text></g>
-              <g class="lbl" data-t1="280" data-t2="6420"><circle cx="368" cy="115" r="3" fill="#8C2F1B" stroke="none"/><text x="358" y="110" text-anchor="end">cream carton to the fridge · 1 h 42 min</text></g>
-              <g class="lbl" data-t1="1330" data-t2="3130"><circle cx="245" cy="220" r="3" fill="#8C2F1B" stroke="none"/><text x="235" y="215" text-anchor="end">scrub the tray · 30 min</text></g>
-              <g class="lbl" data-t1="2980" data-t2="10350"><circle cx="732" cy="80" r="3" fill="#8C2F1B" stroke="none"/><text x="742" y="75">glasses back to the cupboard · 2 h 03 min</text></g>
-              <g class="lbl" data-t1="8300" data-t2="11340"><circle cx="1079" cy="195" r="3" fill="#8C2F1B" stroke="none"/><text x="1089" y="190">tell the household · 51 min</text></g>
+            <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="11.5" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" id="lbls">
+              <g class="lbl" data-t1="15" data-t2="3920"><circle cx="216" cy="170" r="3" fill="#2A5BFF" stroke="none"/><text x="226" y="165">check the oven · 1 h 05 min</text></g>
+              <g class="lbl" data-t1="280" data-t2="6420"><circle cx="368" cy="115" r="3" fill="#2A5BFF" stroke="none"/><text x="358" y="110" text-anchor="end">cream carton to the fridge · 1 h 42 min</text></g>
+              <g class="lbl" data-t1="1330" data-t2="3130"><circle cx="245" cy="220" r="3" fill="#2A5BFF" stroke="none"/><text x="235" y="215" text-anchor="end">scrub the tray · 30 min</text></g>
+              <g class="lbl" data-t1="2980" data-t2="10350"><circle cx="732" cy="80" r="3" fill="#2A5BFF" stroke="none"/><text x="742" y="75">glasses back to the cupboard · 2 h 03 min</text></g>
+              <g class="lbl" data-t1="8300" data-t2="11340"><circle cx="1079" cy="195" r="3" fill="#2A5BFF" stroke="none"/><text x="1089" y="190">tell the household · 51 min</text></g>
             </g>
-            <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" fill="#6E6A62" paint-order="stroke" stroke="#F7F3EA" stroke-width="4" stroke-linejoin="round">
+            <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="10.5" fill="#7A7A78" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">
               <g class="lbl" data-t1="3510" data-t2="3510"><text x="385.7" y="292" text-anchor="middle">plate dropped</text></g>
               <g class="lbl" data-t1="4920" data-t2="4920"><text x="540.7" y="308" text-anchor="middle">phone</text></g>
               <g class="lbl" data-t1="5760" data-t2="5760"><text x="633" y="308" text-anchor="middle">trash</text></g>
@@ -402,9 +405,9 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
         <div class="lab">A clip</div>
         <div class="big">30 seconds</div>
         <svg viewBox="0 0 616 90" role="img" aria-label="A three-hour baseline with a single two-pixel mark showing where a 30-second clip sits">
-          <line x1="0" y1="60" x2="616" y2="60" stroke="#F7F3EA" stroke-width="1"/>
-          <rect x="300" y="44" width="2" height="16" fill="#E0674A"/>
-          <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="11" fill="#A8A39A"><text x="0" y="82">0:00</text><text x="616" y="82" text-anchor="end">3:14</text></g>
+          <line x1="0" y1="60" x2="616" y2="60" stroke="#3A3A3A" stroke-width="1"/>
+          <rect x="300" y="44" width="2" height="16" fill="#6B8FFF"/>
+          <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="11" fill="#9A9A97"><text x="0" y="82">0:00</text><text x="616" y="82" text-anchor="end">3:14</text></g>
         </svg>
         <p>Two pixels wide at the scale of the job. Label: <code>"places cup on shelf"</code></p>
       </div>
@@ -412,10 +415,10 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
         <div class="lab">An episode</div>
         <div class="big">3 h 14 min</div>
         <svg viewBox="0 0 616 90" role="img" aria-label="The same baseline with three arcs linking placements to their later retrieval">
-          <line x1="0" y1="60" x2="616" y2="60" stroke="#F7F3EA" stroke-width="1"/>
-          <g fill="none" stroke="#E0674A" stroke-width="1.5"><path d="M0.8 60 C0.8 10 207 10 207 60"/><path d="M14.8 60 C14.8 -4 339.5 -4 339.5 60"/><path d="M157.6 60 C157.6 -20 547 -20 547 60"/></g>
-          <g fill="#E0674A"><circle cx="0.8" cy="60" r="3"/><circle cx="207" cy="60" r="3"/><circle cx="14.8" cy="60" r="3"/><circle cx="339.5" cy="60" r="3"/><circle cx="157.6" cy="60" r="3"/><circle cx="547" cy="60" r="3"/></g>
-          <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="11" fill="#A8A39A"><text x="0" y="82">0:00</text><text x="616" y="82" text-anchor="end">3:14</text></g>
+          <line x1="0" y1="60" x2="616" y2="60" stroke="#3A3A3A" stroke-width="1"/>
+          <g fill="none" stroke="#6B8FFF" stroke-width="1.5"><path d="M0.8 60 C0.8 10 207 10 207 60"/><path d="M14.8 60 C14.8 -4 339.5 -4 339.5 60"/><path d="M157.6 60 C157.6 -20 547 -20 547 60"/></g>
+          <g fill="#6B8FFF"><circle cx="0.8" cy="60" r="3"/><circle cx="207" cy="60" r="3"/><circle cx="14.8" cy="60" r="3"/><circle cx="339.5" cy="60" r="3"/><circle cx="157.6" cy="60" r="3"/><circle cx="547" cy="60" r="3"/></g>
+          <g font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="11" fill="#9A9A97"><text x="0" y="82">0:00</text><text x="616" y="82" text-anchor="end">3:14</text></g>
         </svg>
         <p>Every placement linked to its retrieval. Label: <code>"glasses back to the cupboard · parked 00:49:40"</code></p>
       </div>
@@ -493,7 +496,7 @@ footer .meta{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter
 <footer>
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Copy That Labs, home">
-      <svg width="20" height="20" viewBox="0 0 64 64" fill="none" aria-hidden="true"><circle cx="32" cy="32" r="23" stroke="#1B1A17" stroke-width="4"/><path d="M9 32h46" stroke="#1B1A17" stroke-width="4" stroke-linecap="round"/><circle cx="9" cy="32" r="6" fill="#8C2F1B"/><circle cx="55" cy="32" r="6" fill="#8C2F1B"/></svg>
+      <svg width="20" height="20" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M46.47 48.38A20 20 0 1 1 46.47 15.62" stroke="#0B0B0B" stroke-width="5" stroke-linecap="round"/><path d="M41.31 41.01A11 11 0 1 1 41.31 22.99" stroke="#0B0B0B" stroke-width="5" stroke-linecap="round"/><circle cx="35" cy="32" r="5" fill="#2A5BFF"/></svg>
       <span>Copy That Labs</span>
     </a>
     <div class="meta"><span>copythatlabs.com</span><span>Human episodes for robot learning</span><span>© 2026</span></div>
